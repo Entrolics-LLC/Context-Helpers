@@ -1,3 +1,3 @@
-const { init } = require('./config')
-
-console.log('init', init())
+module.exports = {
+    ...require('./config')
+}

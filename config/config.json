@@ -1,18 +1,8 @@
 {
-    "contextOltp": {
-        "username": "postgres",
-        "password": "postgres",
-        "database": "context_oltp",
-        "host": "localhost",
-        "dialect": "postgres",
-        "port": 5432
-    },
-    "context": {
-        "username": "postgres",
-        "password": "postgres",
-        "database": "context",
-        "host": "localhost",
-        "dialect": "postgres",
-        "port": 5432
-    }
+    "username": "postgres",
+    "password": "postgres",
+    "database": "context",
+    "host": "localhost",
+    "dialect": "postgres",
+    "port": 5432
 }

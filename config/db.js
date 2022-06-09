@@ -1,15 +1,15 @@
 const { Sequelize } = require('sequelize')
 const config = require('./config.json')
 
-let contextOltp
+let sequelize
 
 const init = async (cloudConfig = config) => {
 
-    contextOltp = new Sequelize(cloudConfig.contextOltp)
+    sequelize = new Sequelize({ ...cloudConfig })
 
     try {
         console.log('connecting...')
-        await contextOltp.authenticate()
+        await sequelize.authenticate()
         console.log('Connection has been established successfully.')
     }
     catch (error) {
@@ -30,6 +30,6 @@ const init = async (cloudConfig = config) => {
 // })
 
 module.exports = {
-    contextOltp,
+    sequelize,
     init
 }
