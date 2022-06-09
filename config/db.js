@@ -19,7 +19,7 @@ const init = async (cloudConfig = config) => {
 }
 
 const migrateDB = () => {
-    exec('sequelize db:migrate', (error, stdout, stderr) => {
+    exec('cd node_modules && cd context-helpers && sequelize db:migrate', (error, stdout, stderr) => {
         console.log('stdout: ' + stdout)
         console.log('stderr: ' + stderr)
         if (error !== null) {
