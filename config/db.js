@@ -1,19 +1,19 @@
 const { Sequelize } = require('sequelize')
 const config = require('./config.json')
 
-var db
-
 const init = async (cloudConfig = config) => {
-
-    db = new Sequelize({ ...cloudConfig })
-
     try {
+        let db = new Sequelize({ ...cloudConfig })
         console.log('connecting...')
         await db.authenticate()
         console.log('Connection has been established successfully.')
+
+        return db
     }
     catch (error) {
         console.error('Unable to connect to the database:', error)
+
+        return null
     }
 }
 
@@ -30,6 +30,5 @@ const init = async (cloudConfig = config) => {
 // })
 
 module.exports = {
-    db,
     init
 }
