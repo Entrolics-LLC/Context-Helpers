@@ -14,9 +14,18 @@ module.exports = (sequelize, DataTypes) => {
     }
   }
   UserGroups.init({
-    id: DataTypes.STRING,
-    user_id: DataTypes.STRING,
-    group_id: DataTypes.STRING,
+    id: {
+      type: DataTypes.STRING,
+      primaryKey: true
+    },
+    user_id: {
+      type: DataTypes.STRING,
+      primaryKey: true
+    },
+    group_id: {
+      type: DataTypes.STRING,
+      primaryKey: true
+    },
     created_by: DataTypes.STRING,
     modified_by: DataTypes.STRING,
     created_at: DataTypes.DATE,

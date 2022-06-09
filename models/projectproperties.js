@@ -14,8 +14,14 @@ module.exports = (sequelize, DataTypes) => {
     }
   }
   ProjectProperties.init({
-    project_id: DataTypes.STRING,
-    additional_properties_id: DataTypes.STRING,
+    project_id: {
+      type: DataTypes.STRING,
+      primaryKey: true
+    },
+    additional_properties_id: {
+      type: DataTypes.STRING,
+      primaryKey: true
+    },
     created_at: DataTypes.DATE,
     updated_at: DataTypes.DATE
   }, {

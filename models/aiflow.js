@@ -14,7 +14,10 @@ module.exports = (sequelize, DataTypes) => {
     }
   }
   AiFlow.init({
-    id: DataTypes.STRING,
+    id: {
+      type: DataTypes.STRING,
+      primaryKey: true
+    },
     flow_name: DataTypes.STRING,
     flow_owner: DataTypes.STRING,
     flow_json: DataTypes.STRING,

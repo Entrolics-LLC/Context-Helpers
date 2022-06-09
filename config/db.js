@@ -1,10 +1,13 @@
 const { Sequelize } = require('sequelize')
 const exec = require('child_process').exec
 const config = require('./config.json')
+const addModels = require('../models')
 
 const init = async (cloudConfig = config) => {
     try {
         let db = new Sequelize({ ...cloudConfig })
+        await addModels(db)
+
         console.log('connecting...')
         await db.authenticate()
         console.log('Connection has been established successfully.')

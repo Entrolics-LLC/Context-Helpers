@@ -14,9 +14,18 @@ module.exports = (sequelize, DataTypes) => {
     }
   }
   ProjectChat.init({
-    id: DataTypes.STRING,
-    project_id: DataTypes.STRING,
-    user_id: DataTypes.STRING,
+    id: {
+      type: DataTypes.STRING,
+      primaryKey: true
+    },
+    project_id: {
+      type: DataTypes.STRING,
+      primaryKey: true
+    },
+    user_id: {
+      type: DataTypes.STRING,
+      primaryKey: true
+    },
     message: DataTypes.STRING,
     created_at: DataTypes.DATE
   }, {

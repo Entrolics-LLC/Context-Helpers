@@ -14,8 +14,14 @@ module.exports = (sequelize, DataTypes) => {
     }
   }
   BigQueryML.init({
-    id: DataTypes.STRING,
-    user_id: DataTypes.STRING,
+    id: {
+      type: DataTypes.STRING,
+      primaryKey: true
+    },
+    user_id: {
+      type: DataTypes.STRING,
+      primaryKey: true
+    },
     modelName: DataTypes.STRING,
     modelType: DataTypes.STRING,
     columnNames: DataTypes.STRING,
@@ -23,7 +29,10 @@ module.exports = (sequelize, DataTypes) => {
     is_evaluated: DataTypes.BOOLEAN,
     is_predicted: DataTypes.BOOLEAN,
     created_at: DataTypes.DATE,
-    table_id: DataTypes.STRING,
+    table_id: {
+      type: DataTypes.STRING,
+      primaryKey: true
+    },
     where_clause: DataTypes.STRING
   }, {
     sequelize,

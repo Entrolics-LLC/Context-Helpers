@@ -14,19 +14,37 @@ module.exports = (sequelize, DataTypes) => {
     }
   }
   ProjectsGraphSchema.init({
-    id: DataTypes.STRING,
-    template_id: DataTypes.STRING,
+    id: {
+      type: DataTypes.STRING,
+      primaryKey: true
+    },
+    template_id: {
+      type: DataTypes.STRING,
+      primaryKey: true
+    },
     source_field_name: DataTypes.STRING,
     source_field_value: DataTypes.STRING,
     target_field_name: DataTypes.STRING,
     target_field_value: DataTypes.STRING,
     relation: DataTypes.STRING,
-    source_id: DataTypes.STRING,
-    target_id: DataTypes.STRING,
+    source_id: {
+      type: DataTypes.STRING,
+      primaryKey: true
+    },
+    target_id: {
+      type: DataTypes.STRING,
+      primaryKey: true
+    },
     project_name: DataTypes.STRING,
     file_name: DataTypes.STRING,
-    file_id: DataTypes.STRING,
-    user_id: DataTypes.STRING,
+    file_id: {
+      type: DataTypes.STRING,
+      primaryKey: true
+    },
+    user_id: {
+      type: DataTypes.STRING,
+      primaryKey: true
+    },
     created_at: DataTypes.DATE
   }, {
     sequelize,

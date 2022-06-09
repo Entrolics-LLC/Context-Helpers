@@ -14,12 +14,21 @@ module.exports = (sequelize, DataTypes) => {
     }
   }
   FileProperties.init({
-    file_id: DataTypes.STRING,
-    additional_property_id: DataTypes.STRING,
+    file_id: {
+      type: DataTypes.STRING,
+      primaryKey: true
+    },
+    additional_property_id: {
+      type: DataTypes.STRING,
+      primaryKey: true
+    },
     created_at: DataTypes.DATE,
     updated_at: DataTypes.DATE,
     property_value: DataTypes.STRING,
-    project_id: DataTypes.STRING
+    project_id: {
+      type: DataTypes.STRING,
+      primaryKey: true
+    }
   }, {
     sequelize,
     modelName: 'FileProperties',

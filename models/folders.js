@@ -14,11 +14,20 @@ module.exports = (sequelize, DataTypes) => {
     }
   }
   Folders.init({
-    id: DataTypes.STRING,
+    id: {
+      type: DataTypes.STRING,
+      primaryKey: true
+    },
     name: DataTypes.STRING,
     description: DataTypes.STRING,
-    user_id: DataTypes.STRING,
-    project_id: DataTypes.STRING,
+    user_id: {
+      type: DataTypes.STRING,
+      primaryKey: true
+    },
+    project_id: {
+      type: DataTypes.STRING,
+      primaryKey: true
+    },
     created_at: DataTypes.DATE,
     updated_at: DataTypes.DATE
   }, {

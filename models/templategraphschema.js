@@ -14,14 +14,29 @@ module.exports = (sequelize, DataTypes) => {
     }
   }
   TemplateGraphSchema.init({
-    template_id: DataTypes.STRING,
-    user_id: DataTypes.STRING,
+    template_id: {
+      type: DataTypes.STRING,
+      primaryKey: true
+    },
+    user_id: {
+      type: DataTypes.STRING,
+      primaryKey: true
+    },
     source_name: DataTypes.STRING,
     target_name: DataTypes.STRING,
-    source_id: DataTypes.STRING,
-    target_id: DataTypes.STRING,
+    source_id: {
+      type: DataTypes.STRING,
+      primaryKey: true
+    },
+    target_id: {
+      type: DataTypes.STRING,
+      primaryKey: true
+    },
     relation: DataTypes.STRING,
-    id: DataTypes.STRING
+    id: {
+      type: DataTypes.STRING,
+      primaryKey: true
+    }
   }, {
     sequelize,
     modelName: 'TemplateGraphSchema',

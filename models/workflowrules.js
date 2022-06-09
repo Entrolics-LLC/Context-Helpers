@@ -14,7 +14,10 @@ module.exports = (sequelize, DataTypes) => {
     }
   }
   WorkflowRules.init({
-    id: DataTypes.STRING,
+    id: {
+      type: DataTypes.STRING,
+      primaryKey: true
+    },
     route: DataTypes.STRING,
     name: DataTypes.STRING,
     url: DataTypes.STRING,

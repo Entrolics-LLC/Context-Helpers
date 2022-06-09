@@ -14,8 +14,14 @@ module.exports = (sequelize, DataTypes) => {
     }
   }
   Notifications.init({
-    id: DataTypes.STRING,
-    user_id: DataTypes.STRING,
+    id: {
+      type: DataTypes.STRING,
+      primaryKey: true
+    },
+    user_id: {
+      type: DataTypes.STRING,
+      primaryKey: true
+    },
     event: DataTypes.STRING,
     status: DataTypes.STRING,
     created_at: DataTypes.DATE,

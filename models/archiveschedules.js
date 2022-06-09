@@ -14,14 +14,23 @@ module.exports = (sequelize, DataTypes) => {
     }
   }
   ArchiveSchedules.init({
-    id: DataTypes.STRING,
+    id: {
+      type: DataTypes.STRING,
+      primaryKey: true
+    },
     web: DataTypes.STRING,
     schedule: DataTypes.STRING,
-    project_id: DataTypes.STRING,
+    project_id: {
+      type: DataTypes.STRING,
+      primaryKey: true
+    },
     created_at: DataTypes.DATE,
     scheduler_name: DataTypes.STRING,
     deleted: DataTypes.BOOLEAN,
-    user_id: DataTypes.STRING,
+    user_id: {
+      type: DataTypes.STRING,
+      primaryKey: true
+    },
     description: DataTypes.STRING,
     title: DataTypes.STRING,
     icon: DataTypes.STRING,

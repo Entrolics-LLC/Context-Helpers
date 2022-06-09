@@ -14,11 +14,23 @@ module.exports = (sequelize, DataTypes) => {
     }
   }
   ShareWorkspace.init({
-    id: DataTypes.STRING,
-    workspace_id: DataTypes.STRING,
-    share_id: DataTypes.STRING,
+    id: {
+      type: DataTypes.STRING,
+      primaryKey: true
+    },
+    workspace_id: {
+      type: DataTypes.STRING,
+      primaryKey: true
+    },
+    share_id: {
+      type: DataTypes.STRING,
+      primaryKey: true
+    },
     share_with_type: DataTypes.STRING,
-    shared_by_user_id: DataTypes.STRING,
+    shared_by_user_id: {
+      type: DataTypes.STRING,
+      primaryKey: true
+    },
     write_access: DataTypes.INTEGER,
     created_at: DataTypes.DATE,
     updated_at: DataTypes.DATE

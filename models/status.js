@@ -14,7 +14,10 @@ module.exports = (sequelize, DataTypes) => {
     }
   }
   Status.init({
-    id: DataTypes.STRING,
+    id: {
+      type: DataTypes.STRING,
+      primaryKey: true
+    },
     status_name: DataTypes.STRING,
     status_type: DataTypes.STRING,
     created_at: DataTypes.DATE,

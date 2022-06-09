@@ -15,10 +15,16 @@ module.exports = (sequelize, DataTypes) => {
   }
   ArtifactNullFields.init({
     artifact_name: DataTypes.STRING,
-    id: DataTypes.STRING,
+    id: {
+      type: DataTypes.STRING,
+      primaryKey: true
+    },
     fields: DataTypes.STRING,
     missing_fields: DataTypes.STRING,
-    project_id: DataTypes.STRING
+    project_id: {
+      type: DataTypes.STRING,
+      primaryKey: true
+    }
   }, {
     sequelize,
     modelName: 'ArtifactNullFields',

@@ -14,10 +14,16 @@ module.exports = (sequelize, DataTypes) => {
     }
   }
   Organizations.init({
-    id: DataTypes.STRING,
+    id: {
+      type: DataTypes.STRING,
+      primaryKey: true
+    },
     org_name: DataTypes.STRING,
     org_description: DataTypes.STRING,
-    parent_org_id: DataTypes.STRING,
+    parent_org_id: {
+      type: DataTypes.STRING,
+      primaryKey: true
+    },
     created_at: DataTypes.DATE,
     updated_at: DataTypes.DATE
   }, {

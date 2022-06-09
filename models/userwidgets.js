@@ -14,13 +14,22 @@ module.exports = (sequelize, DataTypes) => {
     }
   }
   UserWidgets.init({
-    id: DataTypes.STRING,
+    id: {
+      type: DataTypes.STRING,
+      primaryKey: true
+    },
     type: DataTypes.STRING,
     name: DataTypes.STRING,
     layout: DataTypes.STRING,
     properties: DataTypes.STRING,
-    user_id: DataTypes.STRING,
-    workspace_id: DataTypes.STRING,
+    user_id: {
+      type: DataTypes.STRING,
+      primaryKey: true
+    },
+    workspace_id: {
+      type: DataTypes.STRING,
+      primaryKey: true
+    },
     created_at: DataTypes.DATE,
     updated_at: DataTypes.DATE
   }, {

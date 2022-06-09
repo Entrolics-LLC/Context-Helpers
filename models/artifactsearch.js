@@ -22,10 +22,22 @@ module.exports = (sequelize, DataTypes) => {
     email: DataTypes.STRING,
     artifact_size: DataTypes.STRING,
     file_address: DataTypes.STRING,
-    user_id: DataTypes.STRING,
-    id: DataTypes.STRING,
-    folder_id: DataTypes.STRING,
-    project_id: DataTypes.STRING,
+    user_id: {
+      type: DataTypes.STRING,
+      primaryKey: true
+    },
+    id: {
+      type: DataTypes.STRING,
+      primaryKey: true
+    },
+    folder_id: {
+      type: DataTypes.STRING,
+      primaryKey: true
+    },
+    project_id: {
+      type: DataTypes.STRING,
+      primaryKey: true
+    },
     details: DataTypes.STRING
   }, {
     sequelize,

@@ -14,7 +14,10 @@ module.exports = (sequelize, DataTypes) => {
     }
   }
   Agencies.init({
-    id: DataTypes.STRING,
+    id: {
+      type: DataTypes.STRING,
+      primaryKey: true
+    },
     agency_name: DataTypes.STRING,
     agency_acronym: DataTypes.STRING,
     created_at: DataTypes.DATE,

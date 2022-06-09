@@ -14,8 +14,14 @@ module.exports = (sequelize, DataTypes) => {
     }
   }
   ProjectFlowRules.init({
-    id: DataTypes.STRING,
-    user_id: DataTypes.STRING,
+    id: {
+      type: DataTypes.STRING,
+      primaryKey: true
+    },
+    user_id: {
+      type: DataTypes.STRING,
+      primaryKey: true
+    },
     rule_name: DataTypes.STRING,
     backend_api: DataTypes.STRING,
     input_type: DataTypes.STRING,

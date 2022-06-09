@@ -14,10 +14,22 @@ module.exports = (sequelize, DataTypes) => {
     }
   }
   ApproveArtifact.init({
-    id: DataTypes.STRING,
-    artifact_id: DataTypes.STRING,
-    share_id: DataTypes.STRING,
-    user_id: DataTypes.STRING,
+    id: {
+      type: DataTypes.STRING,
+      primaryKey: true
+    },
+    artifact_id: {
+      type: DataTypes.STRING,
+      primaryKey: true
+    },
+    share_id: {
+      type: DataTypes.STRING,
+      primaryKey: true
+    },
+    user_id: {
+      type: DataTypes.STRING,
+      primaryKey: true
+    },
     type: DataTypes.STRING,
     status: DataTypes.STRING,
     approved_by: DataTypes.STRING,

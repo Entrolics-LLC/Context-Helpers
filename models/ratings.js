@@ -14,9 +14,18 @@ module.exports = (sequelize, DataTypes) => {
     }
   }
   Ratings.init({
-    id: DataTypes.STRING,
-    user_id: DataTypes.STRING,
-    artifact_id: DataTypes.STRING,
+    id: {
+      type: DataTypes.STRING,
+      primaryKey: true
+    },
+    user_id: {
+      type: DataTypes.STRING,
+      primaryKey: true
+    },
+    artifact_id: {
+      type: DataTypes.STRING,
+      primaryKey: true
+    },
     rating: DataTypes.FLOAT,
     created_at: DataTypes.DATE,
     updated_at: DataTypes.DATE

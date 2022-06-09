@@ -14,8 +14,14 @@ module.exports = (sequelize, DataTypes) => {
     }
   }
   AssignedArtifacts.init({
-    id: DataTypes.STRING,
-    artifact_id: DataTypes.STRING,
+    id: {
+      type: DataTypes.STRING,
+      primaryKey: true
+    },
+    artifact_id: {
+      type: DataTypes.STRING,
+      primaryKey: true
+    },
     user_assigned_to: DataTypes.STRING,
     created_at: DataTypes.DATE,
     updated_at: DataTypes.DATE

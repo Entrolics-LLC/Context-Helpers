@@ -14,8 +14,14 @@ module.exports = (sequelize, DataTypes) => {
     }
   }
   ArchivedWebpages.init({
-    id: DataTypes.STRING,
-    archive_id: DataTypes.STRING,
+    id: {
+      type: DataTypes.STRING,
+      primaryKey: true
+    },
+    archive_id: {
+      type: DataTypes.STRING,
+      primaryKey: true
+    },
     gcs_url: DataTypes.STRING,
     web_url: DataTypes.STRING,
     created_at: DataTypes.DATE

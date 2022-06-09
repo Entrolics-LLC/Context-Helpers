@@ -14,13 +14,22 @@ module.exports = (sequelize, DataTypes) => {
     }
   }
   FlowDatablocks.init({
-    id: DataTypes.STRING,
+    id: {
+      type: DataTypes.STRING,
+      primaryKey: true
+    },
     flow_name: DataTypes.STRING,
-    user_id: DataTypes.STRING,
+    user_id: {
+      type: DataTypes.STRING,
+      primaryKey: true
+    },
     flow_json: DataTypes.STRING,
     created_at: DataTypes.DATE,
     updated_at: DataTypes.DATE,
-    project_id: DataTypes.STRING
+    project_id: {
+      type: DataTypes.STRING,
+      primaryKey: true
+    }
   }, {
     sequelize,
     modelName: 'FlowDatablocks',

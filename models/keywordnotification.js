@@ -14,10 +14,19 @@ module.exports = (sequelize, DataTypes) => {
     }
   }
   KeywordNotification.init({
-    id: DataTypes.STRING,
-    project_id: DataTypes.STRING,
+    id: {
+      type: DataTypes.STRING,
+      primaryKey: true
+    },
+    project_id: {
+      type: DataTypes.STRING,
+      primaryKey: true
+    },
     keyword: DataTypes.STRING,
-    keyword_id: DataTypes.STRING,
+    keyword_id: {
+      type: DataTypes.STRING,
+      primaryKey: true
+    },
     created_at: DataTypes.DATE,
     file_name: DataTypes.STRING
   }, {

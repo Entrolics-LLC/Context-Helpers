@@ -14,12 +14,18 @@ module.exports = (sequelize, DataTypes) => {
     }
   }
   WebArchives.init({
-    id: DataTypes.STRING,
+    id: {
+      type: DataTypes.STRING,
+      primaryKey: true
+    },
     timestamp: DataTypes.INTEGER,
     web: DataTypes.STRING,
     created_at: DataTypes.DATE,
     links: DataTypes.STRING,
-    project_id: DataTypes.STRING
+    project_id: {
+      type: DataTypes.STRING,
+      primaryKey: true
+    }
   }, {
     sequelize,
     modelName: 'WebArchives',

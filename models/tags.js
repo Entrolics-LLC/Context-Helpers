@@ -14,10 +14,19 @@ module.exports = (sequelize, DataTypes) => {
     }
   }
   Tags.init({
-    id: DataTypes.STRING,
+    id: {
+      type: DataTypes.STRING,
+      primaryKey: true
+    },
     tag_name: DataTypes.STRING,
-    artifact_id: DataTypes.STRING,
-    user_id: DataTypes.STRING,
+    artifact_id: {
+      type: DataTypes.STRING,
+      primaryKey: true
+    },
+    user_id: {
+      type: DataTypes.STRING,
+      primaryKey: true
+    },
     created_at: DataTypes.DATE,
     updated_at: DataTypes.DATE
   }, {

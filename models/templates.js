@@ -14,12 +14,18 @@ module.exports = (sequelize, DataTypes) => {
     }
   }
   Templates.init({
-    id: DataTypes.STRING,
+    id: {
+      type: DataTypes.STRING,
+      primaryKey: true
+    },
     template_name: DataTypes.STRING,
     file_address: DataTypes.STRING,
     is_custom: DataTypes.BOOLEAN,
     is_ready: DataTypes.BOOLEAN,
-    processor_id: DataTypes.STRING,
+    processor_id: {
+      type: DataTypes.STRING,
+      primaryKey: true
+    },
     custom_endpoint: DataTypes.STRING,
     created_at: DataTypes.DATE,
     updated_at: DataTypes.DATE,

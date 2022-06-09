@@ -14,8 +14,14 @@ module.exports = (sequelize, DataTypes) => {
     }
   }
   SavedGraphs.init({
-    id: DataTypes.STRING,
-    user_id: DataTypes.STRING,
+    id: {
+      type: DataTypes.STRING,
+      primaryKey: true
+    },
+    user_id: {
+      type: DataTypes.STRING,
+      primaryKey: true
+    },
     name: DataTypes.STRING,
     created_at: DataTypes.DATE,
     modified_at: DataTypes.DATE,

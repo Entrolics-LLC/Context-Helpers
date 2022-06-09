@@ -14,11 +14,17 @@ module.exports = (sequelize, DataTypes) => {
     }
   }
   FormTemplate.init({
-    id: DataTypes.STRING,
+    id: {
+      type: DataTypes.STRING,
+      primaryKey: true
+    },
     form_name: DataTypes.STRING,
     form_url: DataTypes.STRING,
     created_at: DataTypes.DATE,
-    user_id: DataTypes.STRING,
+    user_id: {
+      type: DataTypes.STRING,
+      primaryKey: true
+    },
     form_size: DataTypes.STRING,
     original_form_name: DataTypes.STRING
   }, {

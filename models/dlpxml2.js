@@ -14,7 +14,10 @@ module.exports = (sequelize, DataTypes) => {
     }
   }
   DlpXml2.init({
-    file_id: DataTypes.STRING,
+    file_id: {
+      type: DataTypes.STRING,
+      primaryKey: true
+    },
     value: DataTypes.STRING,
     type: DataTypes.STRING,
     likelihood: DataTypes.STRING,

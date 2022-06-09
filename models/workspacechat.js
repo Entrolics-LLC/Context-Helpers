@@ -14,11 +14,20 @@ module.exports = (sequelize, DataTypes) => {
     }
   }
   WorkspaceChat.init({
-    id: DataTypes.STRING,
-    workspace_id: DataTypes.STRING,
+    id: {
+      type: DataTypes.STRING,
+      primaryKey: true
+    },
+    workspace_id: {
+      type: DataTypes.STRING,
+      primaryKey: true
+    },
     message: DataTypes.STRING,
     created_at: DataTypes.DATE,
-    user_id: DataTypes.STRING
+    user_id: {
+      type: DataTypes.STRING,
+      primaryKey: true
+    }
   }, {
     sequelize,
     modelName: 'WorkspaceChat',

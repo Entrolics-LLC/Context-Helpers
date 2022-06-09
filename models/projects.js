@@ -14,17 +14,29 @@ module.exports = (sequelize, DataTypes) => {
     }
   }
   Projects.init({
-    id: DataTypes.STRING,
+    id: {
+      type: DataTypes.STRING,
+      primaryKey: true
+    },
     name: DataTypes.STRING,
-    owner_id: DataTypes.STRING,
-    template_id: DataTypes.STRING,
+    owner_id: {
+      type: DataTypes.STRING,
+      primaryKey: true
+    },
+    template_id: {
+      type: DataTypes.STRING,
+      primaryKey: true
+    },
     description: DataTypes.STRING,
     project_image_url: DataTypes.STRING,
     created_at: DataTypes.DATE,
     updated_at: DataTypes.DATE,
     retension: DataTypes.INTEGER,
     is_deleted: DataTypes.BOOLEAN,
-    worflow_id: DataTypes.STRING,
+    worflow_id: {
+      type: DataTypes.STRING,
+      primaryKey: true
+    },
     features: DataTypes.STRING
   }, {
     sequelize,

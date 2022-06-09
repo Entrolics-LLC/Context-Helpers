@@ -14,18 +14,33 @@ module.exports = (sequelize, DataTypes) => {
     }
   }
   FlowSchedule.init({
-    id: DataTypes.STRING,
-    flow_id: DataTypes.STRING,
+    id: {
+      type: DataTypes.STRING,
+      primaryKey: true
+    },
+    flow_id: {
+      type: DataTypes.STRING,
+      primaryKey: true
+    },
     schedule_name: DataTypes.STRING,
     start_date: DataTypes.STRING,
     end_date: DataTypes.STRING,
     execution_time: DataTypes.STRING,
     cron_schedule: DataTypes.STRING,
-    user_id: DataTypes.STRING,
-    updated_by_user_id: DataTypes.STRING,
+    user_id: {
+      type: DataTypes.STRING,
+      primaryKey: true
+    },
+    updated_by_user_id: {
+      type: DataTypes.STRING,
+      primaryKey: true
+    },
     created_at: DataTypes.DATE,
     updated_at: DataTypes.DATE,
-    schedule_id: DataTypes.STRING
+    schedule_id: {
+      type: DataTypes.STRING,
+      primaryKey: true
+    }
   }, {
     sequelize,
     modelName: 'FlowSchedule',

@@ -14,8 +14,14 @@ module.exports = (sequelize, DataTypes) => {
     }
   }
   ShareFolder.init({
-    folder_id: DataTypes.STRING,
-    user_id: DataTypes.STRING,
+    folder_id: {
+      type: DataTypes.STRING,
+      primaryKey: true
+    },
+    user_id: {
+      type: DataTypes.STRING,
+      primaryKey: true
+    },
     created_at: DataTypes.DATE,
     updated_at: DataTypes.DATE
   }, {

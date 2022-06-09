@@ -14,7 +14,10 @@ module.exports = (sequelize, DataTypes) => {
     }
   }
   ArtifactTypes.init({
-    id: DataTypes.INTEGER,
+    id: {
+      type: DataTypes.INTEGER,
+      primaryKey: true
+    },
     artifact_type_name: DataTypes.STRING,
     artifact_type_description: DataTypes.STRING,
     created_at: DataTypes.DATE,

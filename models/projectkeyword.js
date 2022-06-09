@@ -14,9 +14,18 @@ module.exports = (sequelize, DataTypes) => {
     }
   }
   ProjectKeyword.init({
-    id: DataTypes.STRING,
-    userId: DataTypes.STRING,
-    project_id: DataTypes.STRING,
+    id: {
+      type: DataTypes.STRING,
+      primaryKey: true
+    },
+    userid: {
+      type: DataTypes.STRING,
+      primaryKey: true
+    },
+    project_id: {
+      type: DataTypes.STRING,
+      primaryKey: true
+    },
     type: DataTypes.STRING,
     condition: DataTypes.STRING,
     created_at: DataTypes.DATE,

@@ -14,11 +14,17 @@ module.exports = (sequelize, DataTypes) => {
     }
   }
   DashboardCharts.init({
-    id: DataTypes.STRING,
+    id: {
+      type: DataTypes.STRING,
+      primaryKey: true
+    },
     layout: DataTypes.STRING,
     name: DataTypes.STRING,
     vizState: DataTypes.STRING,
-    userId: DataTypes.STRING,
+    userid: {
+      type: DataTypes.STRING,
+      primaryKey: true
+    },
     created_at: DataTypes.DATE,
     updated_at: DataTypes.DATE
   }, {

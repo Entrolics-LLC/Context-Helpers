@@ -14,8 +14,14 @@ module.exports = (sequelize, DataTypes) => {
     }
   }
   PdfForms.init({
-    id: DataTypes.STRING,
-    agency_id: DataTypes.STRING,
+    id: {
+      type: DataTypes.STRING,
+      primaryKey: true
+    },
+    agency_id: {
+      type: DataTypes.STRING,
+      primaryKey: true
+    },
     form_name: DataTypes.STRING,
     form_short_name: DataTypes.STRING,
     created_at: DataTypes.DATE,

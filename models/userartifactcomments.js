@@ -14,11 +14,26 @@ module.exports = (sequelize, DataTypes) => {
     }
   }
   UserArtifactComments.init({
-    id: DataTypes.STRING,
-    artifact_id: DataTypes.STRING,
-    user_id: DataTypes.STRING,
-    status_id: DataTypes.STRING,
-    parent_id: DataTypes.STRING,
+    id: {
+      type: DataTypes.STRING,
+      primaryKey: true
+    },
+    artifact_id: {
+      type: DataTypes.STRING,
+      primaryKey: true
+    },
+    user_id: {
+      type: DataTypes.STRING,
+      primaryKey: true
+    },
+    status_id: {
+      type: DataTypes.STRING,
+      primaryKey: true
+    },
+    parent_id: {
+      type: DataTypes.STRING,
+      primaryKey: true
+    },
     comment: DataTypes.STRING,
     comment_date: DataTypes.DATE,
     comment_delete_date: DataTypes.DATE,

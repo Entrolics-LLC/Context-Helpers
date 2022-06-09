@@ -14,14 +14,23 @@ module.exports = (sequelize, DataTypes) => {
     }
   }
   ExternalSourceConnections.init({
-    id: DataTypes.STRING,
+    id: {
+      type: DataTypes.STRING,
+      primaryKey: true
+    },
     source_name: DataTypes.STRING,
-    user_id: DataTypes.STRING,
+    user_id: {
+      type: DataTypes.STRING,
+      primaryKey: true
+    },
     source_email: DataTypes.STRING,
     configurations: DataTypes.STRING,
     created_at: DataTypes.DATE,
     updated_at: DataTypes.DATE,
-    box_user_id: DataTypes.STRING
+    box_user_id: {
+      type: DataTypes.STRING,
+      primaryKey: true
+    }
   }, {
     sequelize,
     modelName: 'ExternalSourceConnections',

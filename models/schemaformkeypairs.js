@@ -32,7 +32,10 @@ module.exports = (sequelize, DataTypes) => {
     value_y1: DataTypes.FLOAT,
     value_y2: DataTypes.FLOAT,
     pageNumber: DataTypes.INTEGER,
-    id: DataTypes.STRING,
+    id: {
+      type: DataTypes.STRING,
+      primaryKey: true
+    },
     type: DataTypes.STRING,
     field_name_confidence: DataTypes.STRING,
     field_value_confidence: DataTypes.STRING,

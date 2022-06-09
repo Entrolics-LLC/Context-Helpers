@@ -14,9 +14,18 @@ module.exports = (sequelize, DataTypes) => {
     }
   }
   UserOrgs.init({
-    id: DataTypes.STRING,
-    user_id: DataTypes.STRING,
-    organization_id: DataTypes.STRING,
+    id: {
+      type: DataTypes.STRING,
+      primaryKey: true
+    },
+    user_id: {
+      type: DataTypes.STRING,
+      primaryKey: true
+    },
+    organization_id: {
+      type: DataTypes.STRING,
+      primaryKey: true
+    },
     created_at: DataTypes.DATE,
     updated_at: DataTypes.DATE
   }, {

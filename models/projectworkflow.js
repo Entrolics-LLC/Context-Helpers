@@ -14,14 +14,26 @@ module.exports = (sequelize, DataTypes) => {
     }
   }
   ProjectWorkflow.init({
-    id: DataTypes.STRING,
-    user_id: DataTypes.STRING,
-    business_function_id: DataTypes.STRING,
+    id: {
+      type: DataTypes.STRING,
+      primaryKey: true
+    },
+    user_id: {
+      type: DataTypes.STRING,
+      primaryKey: true
+    },
+    business_function_id: {
+      type: DataTypes.STRING,
+      primaryKey: true
+    },
     flow_name: DataTypes.STRING,
     flow_json: DataTypes.STRING,
     flow_description: DataTypes.STRING,
     created_at: DataTypes.DATE,
-    gflow_id: DataTypes.STRING
+    gflow_id: {
+      type: DataTypes.STRING,
+      primaryKey: true
+    }
   }, {
     sequelize,
     modelName: 'ProjectWorkflow',

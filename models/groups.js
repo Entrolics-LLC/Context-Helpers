@@ -14,11 +14,20 @@ module.exports = (sequelize, DataTypes) => {
     }
   }
   Groups.init({
-    id: DataTypes.STRING,
+    id: {
+      type: DataTypes.STRING,
+      primaryKey: true
+    },
     group_name: DataTypes.STRING,
     group_description: DataTypes.STRING,
-    parent_group_id: DataTypes.STRING,
-    organization_id: DataTypes.STRING,
+    parent_group_id: {
+      type: DataTypes.STRING,
+      primaryKey: true
+    },
+    organization_id: {
+      type: DataTypes.STRING,
+      primaryKey: true
+    },
     created_at: DataTypes.DATE,
     updated_at: DataTypes.DATE
   }, {
