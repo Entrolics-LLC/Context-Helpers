@@ -1,4 +1,5 @@
 const { Sequelize } = require('sequelize')
+const exec = require('child_process').exec
 const config = require('./config.json')
 
 const init = async (cloudConfig = config) => {
@@ -17,6 +18,8 @@ const init = async (cloudConfig = config) => {
     }
 }
 
+const migrateDB = () => exec('sequelize db:migrate')
+
 // var sequelize = new Sequelize(config.database, config.username, config.password, {
 //     host: config.host,
 //     port: 5432,
@@ -30,5 +33,6 @@ const init = async (cloudConfig = config) => {
 // })
 
 module.exports = {
-    init
+    init,
+    migrateDB
 }
