@@ -1,5 +1,5 @@
 const sequelize = require('./config/db')
 
-module.exports {
+module.exports = {
     sequelize
 }
