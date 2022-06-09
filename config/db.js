@@ -18,7 +18,15 @@ const init = async (cloudConfig = config) => {
     }
 }
 
-const migrateDB = () => exec('sequelize db:migrate')
+const migrateDB = () => {
+    exec('sequelize db:migrate', (error, stdout, stderr) => {
+        console.log('stdout: ' + stdout)
+        console.log('stderr: ' + stderr)
+        if (error !== null) {
+            console.log('exec error: ' + error)
+        }
+    })
+}
 
 // var sequelize = new Sequelize(config.database, config.username, config.password, {
 //     host: config.host,
