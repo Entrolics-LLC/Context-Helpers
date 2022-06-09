@@ -1,7 +1,7 @@
 const { Sequelize } = require('sequelize')
 const config = require('./config.json')
 
-let db
+var db
 
 const init = async (cloudConfig = config) => {
 
