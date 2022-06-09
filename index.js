@@ -1,3 +1,5 @@
-module.exports = {
-    ...require('./config')
+const sequelize = require('./config/db')
+
+module.exports {
+    sequelize
 }

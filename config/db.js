@@ -1,15 +1,15 @@
 const { Sequelize } = require('sequelize')
 const config = require('./config.json')
 
-let sequelize
+let db
 
 const init = async (cloudConfig = config) => {
 
-    sequelize = new Sequelize({ ...cloudConfig })
+    db = new Sequelize({ ...cloudConfig })
 
     try {
         console.log('connecting...')
-        await sequelize.authenticate()
+        await dv.authenticate()
         console.log('Connection has been established successfully.')
     }
     catch (error) {
@@ -30,6 +30,6 @@ const init = async (cloudConfig = config) => {
 // })
 
 module.exports = {
-    sequelize,
+    db,
     init
 }
