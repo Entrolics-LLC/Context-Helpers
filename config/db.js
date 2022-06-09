@@ -9,7 +9,7 @@ const init = async (cloudConfig = config) => {
 
     try {
         console.log('connecting...')
-        await dv.authenticate()
+        await db.authenticate()
         console.log('Connection has been established successfully.')
     }
     catch (error) {
