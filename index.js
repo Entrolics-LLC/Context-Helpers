@@ -1,3 +1,3 @@
-const contextHelpers = require('./helpers')
+const { init } = require('./config')
 
-module.exports = contextHelpers
+console.log('init', init())
