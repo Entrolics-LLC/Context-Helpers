@@ -12,14 +12,14 @@ module.exports = (sequelize, DataTypes) => {
     static associate(models) {
       // define association here
     }
-  };
+  }
   VisionJson.init({
     time_stamp: DataTypes.DATE,
     file_name: DataTypes.STRING,
     vision_json: DataTypes.STRING
   }, {
     sequelize,
-    modelName: 'VisionJson',
+    modelName: 'vision_json'
   });
   return VisionJson;
 };

@@ -12,7 +12,7 @@ module.exports = (sequelize, DataTypes) => {
     static associate(models) {
       // define association here
     }
-  };
+  }
   PdfDocument.init({
     file_name: DataTypes.STRING,
     pages_count: DataTypes.INTEGER,

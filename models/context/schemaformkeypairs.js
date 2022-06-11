@@ -12,7 +12,7 @@ module.exports = (sequelize, DataTypes) => {
     static associate(models) {
       // define association here
     }
-  };
+  }
   SchemaFormKeyPairs.init({
     file_name: DataTypes.STRING,
     field_name: DataTypes.STRING,

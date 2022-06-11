@@ -12,7 +12,7 @@ module.exports = (sequelize, DataTypes) => {
     static associate(models) {
       // define association here
     }
-  };
+  }
   TemplateGraphSchema.init({
     template_id: DataTypes.STRING,
     user_id: DataTypes.STRING,

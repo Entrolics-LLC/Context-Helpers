@@ -12,7 +12,7 @@ module.exports = (sequelize, DataTypes) => {
     static associate(models) {
       // define association here
     }
-  };
+  }
   AiExplicitContent.init({
     artifact_name: DataTypes.STRING,
     explicit_content: DataTypes.INTEGER,
