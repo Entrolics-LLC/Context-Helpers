@@ -18,10 +18,7 @@ module.exports = (sequelize, DataTypes) => {
     pages_count: DataTypes.INTEGER,
     entities_count: DataTypes.INTEGER,
     text: DataTypes.STRING,
-    schema_id: {
-      type: DataTypes.STRING,
-      primaryKey: true
-    }
+    schema_id: DataTypes.STRING
   }, {
     sequelize,
     modelName: 'PdfDocument',
