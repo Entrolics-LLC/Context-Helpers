@@ -1,4 +1,4 @@
-const { Sequelize } = require('sequelize')
+const { Sequelize, DataTypes } = require('sequelize')
 const exec = require('child_process').exec
 const config = require('./config.json')
 const addModels = require('../models')
