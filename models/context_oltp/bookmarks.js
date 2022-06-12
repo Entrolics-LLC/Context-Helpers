@@ -3,7 +3,7 @@ const {
   Model
 } = require('sequelize');
 module.exports = (sequelize, DataTypes) => {
-  class Bookmarks extends Model {
+  class bookmarks extends Model {
     /**
      * Helper method for defining associations.
      * This method is not a part of Sequelize lifecycle.
@@ -12,28 +12,26 @@ module.exports = (sequelize, DataTypes) => {
     static associate(models) {
       // define association here
     }
-  };
-  Bookmarks.init({
+  }
+  bookmarks.init({
     id: {
-        allowNull: false,
-        primaryKey: true,
-        type: DataTypes.STRING
-      },
+      allowNull: false,
+      primaryKey: true,
+      type: DataTypes.STRING
+    },
     artifact_id: DataTypes.STRING,
     user_id: DataTypes.STRING,
-    createdAt: {
+    created_at:  {
       type: DataTypes.DATE,
-      field: 'created_at',
       allowNull: false
     },
-    updatedAt: {
+    updated_at:  {
       type: DataTypes.DATE,
-      field: 'updated_at',
       allowNull: false
     }
   }, {
     sequelize,
     modelName: 'bookmarks',
   });
-  return Bookmarks;
+  return bookmarks;
 };

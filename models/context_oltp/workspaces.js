@@ -3,7 +3,7 @@ const {
   Model
 } = require('sequelize');
 module.exports = (sequelize, DataTypes) => {
-  class Workspaces extends Model {
+  class workspaces extends Model {
     /**
      * Helper method for defining associations.
      * This method is not a part of Sequelize lifecycle.
@@ -12,30 +12,28 @@ module.exports = (sequelize, DataTypes) => {
     static associate(models) {
       // define association here
     }
-  };
-  Workspaces.init({
+  }
+  workspaces.init({
     id: {
-        allowNull: false,
-        primaryKey: true,
-        type: DataTypes.STRING
-      },
+      allowNull: false,
+      primaryKey: true,
+      type: DataTypes.STRING
+    },
     name: DataTypes.STRING,
     description: DataTypes.STRING,
     user_id: DataTypes.STRING,
     project_id: DataTypes.STRING,
-    createdAt: {
+    created_at:  {
       type: DataTypes.DATE,
-      field: 'created_at',
       allowNull: false
     },
-    updatedAt: {
+    updated_at:  {
       type: DataTypes.DATE,
-      field: 'updated_at',
       allowNull: false
     }
   }, {
     sequelize,
     modelName: 'workspaces',
   });
-  return Workspaces;
+  return workspaces;
 };

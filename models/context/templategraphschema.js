@@ -21,7 +21,11 @@ module.exports = (sequelize, DataTypes) => {
     source_id: DataTypes.STRING,
     target_id: DataTypes.STRING,
     relation: DataTypes.STRING,
-    id: DataTypes.STRING
+    id: {
+      allowNull: false,
+      primaryKey: true,
+      type: DataTypes.STRING
+    }
   }, {
     sequelize,
     modelName: 'template_graph_schema',

@@ -3,7 +3,7 @@ const {
   Model
 } = require('sequelize');
 module.exports = (sequelize, DataTypes) => {
-  class BigQueryML extends Model {
+  class bigQueryML extends Model {
     /**
      * Helper method for defining associations.
      * This method is not a part of Sequelize lifecycle.
@@ -12,13 +12,13 @@ module.exports = (sequelize, DataTypes) => {
     static associate(models) {
       // define association here
     }
-  };
-  BigQueryML.init({
+  }
+  bigQueryML.init({
     id: {
-        allowNull: false,
-        primaryKey: true,
-        type: DataTypes.STRING
-      },
+      allowNull: false,
+      primaryKey: true,
+      type: DataTypes.STRING
+    },
     user_id: DataTypes.STRING,
     modelName: DataTypes.STRING,
     modelType: DataTypes.STRING,
@@ -26,9 +26,8 @@ module.exports = (sequelize, DataTypes) => {
     options: DataTypes.STRING,
     is_evaluated: DataTypes.BOOLEAN,
     is_predicted: DataTypes.BOOLEAN,
-    createdAt: {
+    created_at:  {
       type: DataTypes.DATE,
-      field: 'created_at',
       allowNull: false
     },
     table_id: DataTypes.STRING,
@@ -37,5 +36,5 @@ module.exports = (sequelize, DataTypes) => {
     sequelize,
     modelName: 'bigQueryML',
   });
-  return BigQueryML;
+  return bigQueryML;
 };

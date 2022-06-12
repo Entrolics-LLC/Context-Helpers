@@ -3,7 +3,7 @@ const {
   Model
 } = require('sequelize');
 module.exports = (sequelize, DataTypes) => {
-  class Artifact extends Model {
+  class artifact extends Model {
     /**
      * Helper method for defining associations.
      * This method is not a part of Sequelize lifecycle.
@@ -12,13 +12,13 @@ module.exports = (sequelize, DataTypes) => {
     static associate(models) {
       // define association here
     }
-  };
-  Artifact.init({
+  }
+  artifact.init({
     id: {
-        allowNull: false,
-        primaryKey: true,
-        type: DataTypes.STRING
-      },
+      allowNull: false,
+      primaryKey: true,
+      type: DataTypes.STRING
+    },
     artifact_name: DataTypes.STRING,
     organization_id: DataTypes.STRING,
     artifact_description: DataTypes.STRING,
@@ -28,14 +28,12 @@ module.exports = (sequelize, DataTypes) => {
     artifact_type: DataTypes.STRING,
     status_id: DataTypes.STRING,
     file_address: DataTypes.STRING,
-    createdAt: {
+    created_at:  {
       type: DataTypes.DATE,
-      field: 'created_at',
       allowNull: false
     },
-    updatedAt: {
+    updated_at:  {
       type: DataTypes.DATE,
-      field: 'updated_at',
       allowNull: false
     },
     original_artifact_name: DataTypes.STRING,
@@ -61,10 +59,18 @@ module.exports = (sequelize, DataTypes) => {
     numberOfAttempts: DataTypes.INTEGER,
     error: DataTypes.STRING,
     project_id: DataTypes.STRING,
-    expires_at: DataTypes.DATE
+    expires_at: DataTypes.DATE,
+    executed: DataTypes.BOOLEAN,
+    original_file_address: DataTypes.STRING,
+    redacted_file_address: DataTypes.STRING,
+    executed_rule_ids: DataTypes.STRING,
+    executed_rule_id: DataTypes.STRING,
+    file_versions: DataTypes.STRING,
+    md5_versions: DataTypes.STRING,
+    artifact_name_versions: DataTypes.STRING
   }, {
     sequelize,
     modelName: 'artifact',
   });
-  return Artifact;
+  return artifact;
 };

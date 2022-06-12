@@ -11,9 +11,9 @@ let files = fs.readdirSync(__dirname).filter(file => {
 
 var models = {}
 
-const addModels = async (db) => {
+const addModels = async (db, path = 'context') => {
   return files.forEach(file => {
-    const model = require(path.join(__dirname, file))(db, Sequelize.DataTypes)
+    const model = require(path.join(__dirname, `/${path}`, file))(db, Sequelize.DataTypes)
     models[model.name] = model
 
     return models
