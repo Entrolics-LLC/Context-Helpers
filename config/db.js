@@ -1,15 +1,23 @@
 const { Sequelize, DataTypes } = require('sequelize')
 const exec = require('child_process').exec
-const config = require('./config.json')
+const config = require('./config')
 const addModels = require('../models')
 
-const init = async (cloudConfig = config) => {
+const init = async (dbPath, cloudConfig = config) => {
     try {
+        cloudConfig = cloudConfig[dbPath]
         let db = new Sequelize({ ...cloudConfig })
-        await addModels(db)
+        await addModels(db, dbPath)
 
         console.log('connecting...')
         await db.authenticate()
+
+        // try {
+        //     migrateDB()
+        // }
+        // catch (e) {
+        //     console.log('e', e)
+        // }
         console.log('Connection has been established successfully.')
 
         return db
@@ -22,7 +30,7 @@ const init = async (cloudConfig = config) => {
 }
 
 const migrateDB = () => {
-    exec('cd node_modules && cd context-helpers && sequelize db:migrate', (error, stdout, stderr) => {
+    exec('npm run createMigration', (error, stdout, stderr) => {
         console.log('stdout: ' + stdout)
         console.log('stderr: ' + stderr)
         if (error !== null) {

@@ -1,8 +1,8 @@
 
 const runQuery = async (db, query) => {
-    const data = await db.query(query)
+    const data = await db.query(query, { type: db?.QueryTypes?.SELECT })
 
-    data
+    return data
 }
 
 module.exports = {

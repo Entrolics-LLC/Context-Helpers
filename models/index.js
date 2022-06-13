@@ -5,15 +5,15 @@ const path = require('path')
 const Sequelize = require('sequelize')
 const basename = path.basename(__filename)
 
-let files = fs.readdirSync(__dirname).filter(file => {
-  return (file.indexOf('.') !== 0) && (file !== basename) && (file.slice(-3) === '.js')
-})
-
 var models = {}
 
-const addModels = async (db, path = 'context') => {
+const addModels = async (db, dbPath = 'context') => {
+  let files = fs.readdirSync(path.join(__dirname, `/${dbPath}`)).filter(file => {
+    return (file.indexOf('.') !== 0) && (file !== basename) && (file.slice(-3) === '.js')
+  })
   return files.forEach(file => {
-    const model = require(path.join(__dirname, `/${path}`, file))(db, Sequelize.DataTypes)
+    const model = require(path.join(__dirname, `/${dbPath}`, file))(db, Sequelize.DataTypes)
+    console.log('model', model)
     models[model.name] = model
 
     return models
