@@ -23,6 +23,16 @@ const init = async (dbPath, cloudConfig = config) => {
     }
 }
 
+const createDB = () => {
+    exec('cd node_modules && cd context-helpers && npm run createDB', (error, stdout, stderr) => {
+        console.log('stdout: ' + stdout)
+        console.log('stderr: ' + stderr)
+        if (error !== null) {
+            console.log('exec error: ' + error)
+        }
+    })
+}
+
 const migrateDB = () => {
     exec('cd node_modules && cd context-helpers && npm run createMigration', (error, stdout, stderr) => {
         console.log('stdout: ' + stdout)
@@ -47,5 +57,6 @@ const migrateDB = () => {
 
 module.exports = {
     init,
-    migrateDB
+    migrateDB,
+    createDB
 }
