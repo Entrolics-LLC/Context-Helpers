@@ -5,9 +5,9 @@ const connectDB = async () => {
     try {
         const db = await sequelize.init('context_oltp')
 
-        // let query = `INSERT INTO "Users" VALUES('id', 'first_name', 'middle_initial','last_name', 'job_title', ${0}, 'address', 'zip_code', 'city', 'email', 'user_interest_id', 'country', 'state', 'status_id','bdbb049c-99a1-42a3-8ae6-e5f97ca2b8f9', 'hashPassword', 'auth_type', 'social_id', 'phone_number', transaction_timestamp(), CURRENT_TIMESTAMP, 'GGG', ${false}, 'token', 'd', 'collaborator', ${false}, ${false})`
+        // let query = `INSERT INTO users VALUES('id', 'first_name', 'middle_initial','last_name', 'job_title', ${0}, 'address', 'zip_code', 'city', 'email', 'user_interest_id', 'country', 'state', 'status_id','bdbb049c-99a1-42a3-8ae6-e5f97ca2b8f9', 'hashPassword', 'auth_type', 'social_id', 'phone_number', NOW(), NOW(), ${null}, ${true}, 'token', ${null}, 'collaborator', ${false}, ${false})`
 
-        let query = `SELECT * FROM users WHERE email='mansoor@gmail.com' AND is_email_verified=true`
+        let query = `SELECT * FROM users WHERE email='email' AND is_email_verified=true`
 
         let data = await runQuery(db, query)
 
@@ -18,7 +18,7 @@ const connectDB = async () => {
     }
 }
 
-connectDB()
+// connectDB()
 
 module.exports = {
     ...require('./helpers'),

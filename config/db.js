@@ -12,12 +12,6 @@ const init = async (dbPath, cloudConfig = config) => {
         console.log('connecting...')
         await db.authenticate()
 
-        // try {
-        //     migrateDB()
-        // }
-        // catch (e) {
-        //     console.log('e', e)
-        // }
         console.log('Connection has been established successfully.')
 
         return db
@@ -30,7 +24,7 @@ const init = async (dbPath, cloudConfig = config) => {
 }
 
 const migrateDB = () => {
-    exec('npm run createMigration', (error, stdout, stderr) => {
+    exec('cd node_modules && cd context-helpers && npm run createMigration', (error, stdout, stderr) => {
         console.log('stdout: ' + stdout)
         console.log('stderr: ' + stderr)
         if (error !== null) {

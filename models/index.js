@@ -13,7 +13,6 @@ const addModels = async (db, dbPath = 'context') => {
   })
   return files.forEach(file => {
     const model = require(path.join(__dirname, `/${dbPath}`, file))(db, Sequelize.DataTypes)
-    console.log('model', model)
     models[model.name] = model
 
     return models
