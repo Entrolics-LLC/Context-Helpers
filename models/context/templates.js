@@ -25,14 +25,12 @@ module.exports = (sequelize, DataTypes) => {
     is_ready: DataTypes.BOOLEAN,
     processor_id: DataTypes.STRING,
     custom_endpoint: DataTypes.STRING,
-    createdAt: {
+    created_at: {
       type: DataTypes.DATE,
-      field: 'created_at',
       allowNull: false
     },
-    updatedAt: {
+    updated_at: {
       type: DataTypes.DATE,
-      field: 'updated_at',
       allowNull: false
     },
     description: DataTypes.STRING,

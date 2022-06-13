@@ -18,9 +18,8 @@ module.exports = (sequelize, DataTypes) => {
     artifact_type: DataTypes.STRING,
     artifact_extension: DataTypes.STRING,
     original_artifact_name: DataTypes.STRING,
-    createdAt: {
+    created_at: {
       type: DataTypes.DATE,
-      field: 'created_at',
       allowNull: false
     },
     email: DataTypes.STRING,
