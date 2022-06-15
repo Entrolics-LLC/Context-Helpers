@@ -6,6 +6,7 @@ const runQuery = async (db, query) => {
         return Array.isArray(data) ? data?.flat() : data
     }
     catch (e) {
+        console.log('e', e)
         return []
     }
 
