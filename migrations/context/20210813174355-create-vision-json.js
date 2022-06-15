@@ -1,7 +1,7 @@
 'use strict';
 module.exports = {
   up: async (queryInterface, Sequelize) => {
-    await queryInterface.createTable('VisionJsons', {
+    await queryInterface.createTable('vision_json', {
       id: {
         allowNull: false,
         primaryKey: true,
@@ -19,6 +19,6 @@ module.exports = {
     });
   },
   down: async (queryInterface, Sequelize) => {
-    await queryInterface.dropTable('VisionJsons');
+    await queryInterface.dropTable('vision_json');
   }
 };

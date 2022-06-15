@@ -3,7 +3,7 @@ const { runQuery } = require('./helpers')
 
 const connectDB = async () => {
     try {
-        const db = await sequelize.init('context_oltp')
+        const db = sequelize.init('context_oltp')
 
         // let query = `INSERT INTO users VALUES('id', 'first_name', 'middle_initial','last_name', 'job_title', ${0}, 'address', 'zip_code', 'city', 'email', 'user_interest_id', 'country', 'state', 'status_id','bdbb049c-99a1-42a3-8ae6-e5f97ca2b8f9', 'hashPassword', 'auth_type', 'social_id', 'phone_number', NOW(), NOW(), ${null}, ${true}, 'token', ${null}, 'collaborator', ${false}, ${false})`
 
@@ -18,7 +18,7 @@ const connectDB = async () => {
     }
 }
 
-// connectDB()
+connectDB()
 
 module.exports = {
     ...require('./helpers'),
