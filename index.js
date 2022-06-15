@@ -18,7 +18,7 @@ const connectDB = async () => {
     }
 }
 
-connectDB()
+// connectDB()
 
 module.exports = {
     ...require('./helpers'),
