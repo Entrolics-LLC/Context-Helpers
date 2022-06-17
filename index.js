@@ -1,4 +1,5 @@
 const sequelize = require('./config/db')
+const bigQModels = require('./bigQModels')
 const { runQuery } = require('./helpers')
 
 const connectDB = async () => {
@@ -22,5 +23,6 @@ const connectDB = async () => {
 
 module.exports = {
     ...require('./helpers'),
-    sequelize
+    sequelize,
+    bigQModels
 }
