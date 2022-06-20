@@ -1,7 +1,7 @@
 {
     "development": {
         "username": "postgres",
-        "password": "postgres",
+        "password": "abbas110",
         "database": "postgres",
         "host": "localhost",
         "dialect": "postgres",
@@ -9,7 +9,7 @@
     },
     "context": {
         "username": "postgres",
-        "password": "postgres",
+        "password": "abbas110",
         "database": "context",
         "host": "localhost",
         "dialect": "postgres",
@@ -17,7 +17,7 @@
     },
     "context_oltp": {
         "username": "postgres",
-        "password": "postgres",
+        "password": "abbas110",
         "database": "context_oltp",
         "host": "localhost",
         "dialect": "postgres",
