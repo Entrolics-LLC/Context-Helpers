@@ -290,21 +290,6 @@ const getUniqueArrayOfObjects = (ary, objectPropertName) => {
     })
 }
 
-const runBigQuery = (query, db) => {
-
-    return new Promise(async (resolve, reject) => {
-        try {
-            let data = await runQuery(db, query)
-            let finalData = (Array.isArray(data) && typeof data?.flat == 'function') ? data?.flat() : []
-
-            return resolve(finalData)
-        }
-        catch (e) {
-            reject(e)
-        }
-    })
-}
-
 const getTemplateData = async (fileUrl, id, processorId, db) => {
     let sqlQuery
     return new Promise(async (resolve, reject) => {
@@ -692,7 +677,7 @@ const setProcessingStatus = ({ status, id, additonalKeys }, db) => {
 const getProjectDetails = (project_id) => {
     if (!isNull(project_id)) {
         const myQuery = `SELECT  * FROM \`context_oltp.projects\` where id='${project_id}'`
-        return runBigQuery(myQuery)
+        return runQuery(myQuery)
     } else {
         throw new Error(`ProjectId is required`)
     }
@@ -702,7 +687,7 @@ const getProjectDetails = (project_id) => {
 const getProjectFlow = (flow_id) => {
     if (!isNull(flow_id)) {
         const myQuery = `SELECT  f.id,f.gflow_id,f.flow_name,f.flow_json, f.flow_description,f.created_at, b.name as bf_name, b.description as bf_description, u.first_name, u.last_name,u.avatar,u.email FROM \`context_oltp.project_workflow\` f LEFT JOIN context.bussiness_functions b ON b.id=f.business_function_id LEFT JOIN context_oltp.users u ON u.id=f.user_id where f.id='${flow_id}'`
-        return runBigQuery(myQuery)
+        return runQuery(myQuery)
     } else {
         throw new Error(`flowid is required`)
     }
@@ -762,7 +747,7 @@ const parseVideoData = (json) => (
 )
 
 module.exports = {
-    runBigQuery,
+    runQuery,
     parseVideoData,
     getVideoJSONKeys,
     getProjectDetails,
@@ -770,7 +755,6 @@ module.exports = {
     arrayIntoBigqueryArray,
     imageTextDetection,
     getDocumentAIProcessorsList,
-    runBigQuery,
     createSchedule,
     setProcessingStatus,
     getUniqueArrayOfObjects,
