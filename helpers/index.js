@@ -1,51 +1,13 @@
-const scheduler = require('@google-cloud/scheduler')
 const { v4: uuidv4 } = require('uuid')
 const axios = require('axios')
 const Fuse = require('fuse.js')
 const _ = require('lodash')
 const { Storage } = require('@google-cloud/storage')
-const transporter = require('../config/sendMail')
 const moment = require('moment')
-const { BigQuery } = require('@google-cloud/bigquery')
 var jwt = require('jwt-simple')
 const isNull = require('./isNull')
-const { projectId } = require('../config/gcpConfig')
-const service_key = require('../../service_key.json')
-const { DocumentProcessorServiceClient } = require('@google-cloud/documentai').v1beta3
-const { WorkflowsClient, ExecutionsClient } = require('@google-cloud/workflows')
-
-
-const workFlowClient = new WorkflowsClient({
-    projectId,
-    credentials: service_key
-})
-
-const flowExecutionClient = new ExecutionsClient({
-    projectId,
-    credentials: service_key
-})
-
-const Vision = require('@google-cloud/vision')
-const visionClient = new Vision.ImageAnnotatorClient({
-    projectId,
-    credentials: service_key
-})
-
-const DocAIclient = new DocumentProcessorServiceClient({
-    projectId,
-    credentials: service_key
-})
-
-const docAIParent = `projects/${projectId}/locations/us`
-
-const options = {
-    keyFilename: process.env.keyFilename,
-    projectId
-}
-
-let option = {
-    location: 'US'
-}
+const { runQuery } = require('./postgresQueries')
+const { projectId, workFlowClient, flowExecutionClient, visionClient, DocAIclient } = require('../config/gcpConfig')
 
 const getGoogleFlow = (name) => (
     new Promise(async (resolve, reject) => {
@@ -88,6 +50,7 @@ const getDocumentAIProcessorsList = () => {
     //https://googleapis.dev/nodejs/documentai/latest/v1beta3.DocumentProcessorServiceClient.html#listProcessors
     return new Promise(async (resolve, reject) => {
         try {
+            const docAIParent = `projects/${projectId}/locations/us`
             let d = await DocAIclient.listProcessors({ parent: docAIParent })
             let noNulls = d?.filter(Boolean)?.flat()
 
@@ -125,18 +88,11 @@ const arrayIntoBigqueryArray = (array) => ( //Convert JS Array into Bigquery Arr
         : `[]`
 )
 
-const client = new scheduler.CloudSchedulerClient({
-    projectId,
-    credentials: service_key
-})
+const keyPairTable = process.env.template_key_pairs
+const graphSchemaTable = process.env.template_graph_schema
+const projects_graph_schema = process.env.projects_graph_schema
 
-const keyPairTable = `\`${projectId}.${process.env.template_key_pairs}\``
-const graphSchemaTable = `\`${projectId}.${process.env.template_graph_schema}\``
-const projects_graph_schema = `\`${projectId}.${process.env.projects_graph_schema}\``
-
-const bigQuery = new BigQuery(options)
-const DB = `${projectId}.${process.env.bigQuery_DB}`
-const templatedTable = `\`${projectId}.${process.env.templates_table}\``
+const templatedTable = process.env.templates_table
 
 const tokenSecret = 'access_token'
 let minutes = process.env.NODE_ENV === 'production' ? 15 : 60
@@ -171,100 +127,99 @@ const getAuthUrl = async (uri) => {
 
 const validateData = (data) => data ? "'" + data?.replace?.(/'|"/gi, '') + "'" : null
 
-const emailText = (user) => {
-    const msg = {
-        to: user.email,
-        from: 'entrollics@gmail.com',
-        subject: 'Verify Your Email',
-        text: `Hello ${user.first_name},
-        <br/>
-        <br/>
-        To complete your signup to Context, Please verify your email by clicking the link below:
-        <br />
-        <br />
-        ${origin}/emailverification/${user.token}
-        <br />
-        <br />
-        Alternatively, you can copy the link to your browser's address bar.
-        <br />
-        <br />
-        If you don't use this link within 1 day, the link will be expired.
-        Best regards,
-        <br/>
-        Context.
-        `,
-        html: `Hello ${user.first_name},
-        <br/>
-        <br/>
-        To complete your signup to Context, Please verify your email by clicking the link below:
-        <br />
-        <br />
-        ${origin}/emailverification/${user.token}
-        <br />
-        <br />
-        Alternatively, you can copy the link to your browser's address bar.
-        <br />
-        <br />
-        If you don't use this link within 1 day, the link will be expired.
-        Best regards,
-        <br/>
-        Context.`
-    }
+// const emailText = (user) => {
+//     const msg = {
+//         to: user.email,
+//         from: 'entrollics@gmail.com',
+//         subject: 'Verify Your Email',
+//         text: `Hello ${user.first_name},
+//         <br/>
+//         <br/>
+//         To complete your signup to Context, Please verify your email by clicking the link below:
+//         <br />
+//         <br />
+//         ${origin}/emailverification/${user.token}
+//         <br />
+//         <br />
+//         Alternatively, you can copy the link to your browser's address bar.
+//         <br />
+//         <br />
+//         If you don't use this link within 1 day, the link will be expired.
+//         Best regards,
+//         <br/>
+//         Context.
+//         `,
+//         html: `Hello ${user.first_name},
+//         <br/>
+//         <br/>
+//         To complete your signup to Context, Please verify your email by clicking the link below:
+//         <br />
+//         <br />
+//         ${origin}/emailverification/${user.token}
+//         <br />
+//         <br />
+//         Alternatively, you can copy the link to your browser's address bar.
+//         <br />
+//         <br />
+//         If you don't use this link within 1 day, the link will be expired.
+//         Best regards,
+//         <br/>
+//         Context.`
+//     }
 
-    transporter.sendMail(msg)
-}
+//     transporter.sendMail(msg)
+// }
 
-const forgotEmail = (user) => {
-    const msg = {
-        to: user.email,
-        from: 'entrollics@gmail.com',
-        subject: 'Update your password',
-        text: `Hello ${user.first_name},
-        <br/>
-        <br/>
-        To update your password, Please click the link below:
-        <br />
-        <br />
-        ${origin}/update-password/${user.token}
-        <br />
-        <br />
-        Alternatively, you can copy the link to your browser's address bar.
-        <br />
-        <br />
-        If you don't use this link within 2 days, the link will be expired.
-        Best regards,
-        <br/>
-        Context.
-        `,
-        html: `Hello ${user.first_name},
-        <br/>
-        <br/>
-        To update your password, Please click the link below:
-        <br />
-        <br />
-        ${origin}/update-password/${user.token}
-        <br />
-        <br />
-        Alternatively, you can copy the link to your browser's address bar.
-        <br />
-        <br />
-        If you don't use this link within 2 days, the link will be expired.
-        Best regards,
-        <br/>
-        Context.
-        `
-    }
+// const forgotEmail = (user) => {
+//     const msg = {
+//         to: user.email,
+//         from: 'entrollics@gmail.com',
+//         subject: 'Update your password',
+//         text: `Hello ${user.first_name},
+//         <br/>
+//         <br/>
+//         To update your password, Please click the link below:
+//         <br />
+//         <br />
+//         ${origin}/update-password/${user.token}
+//         <br />
+//         <br />
+//         Alternatively, you can copy the link to your browser's address bar.
+//         <br />
+//         <br />
+//         If you don't use this link within 2 days, the link will be expired.
+//         Best regards,
+//         <br/>
+//         Context.
+//         `,
+//         html: `Hello ${user.first_name},
+//         <br/>
+//         <br/>
+//         To update your password, Please click the link below:
+//         <br />
+//         <br />
+//         ${origin}/update-password/${user.token}
+//         <br />
+//         <br />
+//         Alternatively, you can copy the link to your browser's address bar.
+//         <br />
+//         <br />
+//         If you don't use this link within 2 days, the link will be expired.
+//         Best regards,
+//         <br/>
+//         Context.
+//         `
+//     }
 
-    transporter.sendMail(msg)
-}
+//     transporter.sendMail(msg)
+// }
 
-const updateToken = async (id) => {
+const updateToken = async (id, db) => {
     try {
         let whereStatement = `WHERE id='${id}' AND is_email_verified=true`
-        let sqlQuery = `SELECT * EXCEPT(password) FROM ${DB}.users ${whereStatement}`
-        let option = { query: sqlQuery, location: 'US' }
+        let sqlQuery = `SELECT * EXCEPT(password) FROM users ${whereStatement}`
 
-        let user = await bigQuery.query(option)
+        let user = await runQuery(db, sqlQuery)
 
         if (user[0].length > 0) {
             user = user[0][0]
@@ -273,10 +228,9 @@ const updateToken = async (id) => {
                 if (decoded.exp >= moment().valueOf()) {
                     decoded.exp = moment().add(minutes, 'minutes').valueOf()
                     const updatedToken = jwt.encode(decoded, tokenSecret)
-                    sqlQuery = `UPDATE ${DB}.users SET access_token='${updatedToken}' ${whereStatement}`
+                    sqlQuery = `UPDATE users SET access_token='${updatedToken}' ${whereStatement}`
                     console.log('sqlQuery', sqlQuery)
-                    option.query = sqlQuery
-                    await bigQuery.query(option)
+                    await runQuery(db, sqlQuery)
 
                     return true
                 }
@@ -290,7 +244,7 @@ const updateToken = async (id) => {
     }
 }
 
-const addToken = async (id) => {
+const addToken = async (id, db) => {
     try {
         const token = jwt.encode({
             iss: id,
@@ -298,10 +252,9 @@ const addToken = async (id) => {
         }, tokenSecret)
 
         let whereStatement = `WHERE id='${id}' AND is_email_verified=true`
-        let sqlQuery = `UPDATE ${DB}.users SET access_token='${token}' ${whereStatement}`
-        let option = { query: sqlQuery, location: 'US' }
+        let sqlQuery = `UPDATE users SET access_token='${token}' ${whereStatement}`
 
-        await bigQuery.query(option)
+        await runQuery(db, sqlQuery)
     }
     catch (e) {
     }
@@ -321,15 +274,11 @@ const getUniqueArrayOfObjects = (ary, objectPropertName) => {
     })
 }
 
-const runBigQuery = (query) => {
-    let option = {
-        query,
-        location: 'US'
-    }
+const runBigQuery = (query, db) => {
 
     return new Promise(async (resolve, reject) => {
         try {
-            let [data] = await bigQuery.query(option)
+            let data = await runQuery(db, query)
             let finalData = (Array.isArray(data) && typeof data?.flat == 'function') ? data?.flat() : []
 
             return resolve(finalData)
@@ -340,31 +289,23 @@ const runBigQuery = (query) => {
     })
 }
 
-const getTemplateData = async (fileUrl, id, processorId) => {
+const getTemplateData = async (fileUrl, id, processorId, db) => {
     let sqlQuery
-    let option = {
-        query: sqlQuery,
-        location: 'US'
-    }
     return new Promise(async (resolve, reject) => {
         await axios.post(`https://us-central1-elaborate-howl-285701.cloudfunctions.net/doc_ai_v3_node_http${!isNull(processorId) ? `?processorId=${processorId}` : ''}`, { gcs_input_uri: fileUrl, formKeyPairTableName: 'schema_form_key_pairs', processorId })
             .then(async () => {
                 try {
-                    sqlQuery = `SELECT * FROM  ${DB}.artifact WHERE id='${id}'`
-                    option.query = sqlQuery
-                    let template = await bigQuery.query(option)
-                    template = template?.flat()?.[0]
+                    sqlQuery = `SELECT * FROM  artifact WHERE id='${id}'`
+                    let template = await runQuery(db, sqlQuery)
                     sqlQuery = `SELECT * FROM  ${keyPairTable} WHERE file_name='${template?.artifact_name}'`
-                    option.query = sqlQuery
-                    let keyPairs = await bigQuery.query(option)
+                    let keyPairs = await runQuery(db, sqlQuery)
                     let file_address = await getAuthUrl(template.file_address)
                     template.file_address = file_address
-                    keyPairs = keyPairs?.flat()
                     resolve({
                         success: true,
                         message: 'Successfully Created Form Template',
                         keyPairs,
-                        template,
+                        template
                     })
                 }
                 catch (e) {
@@ -472,50 +413,38 @@ const matchTemplate = (template, formData) => {
     return { matchObj, matchValidated }
 }
 
-const updateTemplateHelper = async (arr, user_id, id, isCustom) => {
+const updateTemplateHelper = async (arr, user_id, id, isCustom, db) => {
     let sqlQuery
-    let option = {
-        query: sqlQuery,
-        location: 'US'
-    }
     let finalValidatedFieldName
     let uniqueArr = []
     let columnName
 
     if (isCustom) {
         sqlQuery = `UPDATE ${templatedTable} SET is_ready=${true} WHERE id='${id}'`
-        option.query = sqlQuery
-        await bigQuery.query(option)
+        await runQuery(db, sqlQuery)
     }
     else {
         for (var v of arr) {
             finalValidatedFieldName = isNull(v?.validated_field_name) ? v?.field_name : v?.validated_field_name
             columnName = finalValidatedFieldName
             sqlQuery = `UPDATE ${keyPairTable} SET updated_date=CURRENT_TIMESTAMP(), validated_field_name='${finalValidatedFieldName}', data_types=${v?.data_type ? `${JSON.stringify(v?.data_type)}` : null}, updated_by='${user_id}', nullable=${v?.nullable}, column_name='${columnName}' WHERE id='${v?.id}'`
-            option.query = sqlQuery
-            await bigQuery.query(option)
+            await runQuery(db, sqlQuery)
                 .then((s) => console.log('success'))
                 .catch((e) => console.log('error', e))
             uniqueArr.push(finalValidatedFieldName)
         }
 
-        sqlQuery = `UPDATE ${DB}.artifact SET is_verified=${true} WHERE artifact_name='${v?.file_name}'`
-        option.query = sqlQuery
-        await bigQuery.query(option)
+        sqlQuery = `UPDATE artifact SET is_verified=${true} WHERE artifact_name='${v?.file_name}'`
+        await runQuery(db, sqlQuery)
         sqlQuery = `UPDATE ${templatedTable} SET is_ready=${true} WHERE id='${id}'`
-        option.query = sqlQuery
-        await bigQuery.query(option)
+        await runQuery(db, sqlQuery)
     }
 
 }
 
-const graphSchemHelper = async (template_id, user_id, graph_schema) => {
+const graphSchemHelper = async (template_id, user_id, graph_schema, db) => {
 
     let sqlQuery
-    let option = {
-        query: sqlQuery,
-        location: 'US'
-    }
 
     for (var v of graph_schema) {
         let source_name = v?.source
@@ -526,32 +455,26 @@ const graphSchemHelper = async (template_id, user_id, graph_schema) => {
 
         sqlQuery = `INSERT INTO ${graphSchemaTable} VALUES('${template_id}', '${user_id}', '${source_name}', '${target_name}', '${source_id}', '${target_id}', '${relation}', '${uuidv4()}')`
 
-        option.query = sqlQuery
-        await bigQuery.query(option)
+        await runQuery(db, sqlQuery)
             .then((s) => console.log('success from graphSchemHelper', s))
             .catch((e) => console.log('error from graphSchemHelper', e?.errors))
     }
 }
 
-const formMatching = async (obj) => {
+const formMatching = async (obj, db) => {
     try {
         let { keyPairTable, template_file_name, fileUrl, fileName, fileId, bQTable, table_name } = obj
 
-        let sqlQuery = `SELECT * FROM  ${keyPairTable} WHERE file_name='${template_file_name}' AND column_name IS NOT NULL`
-        let option = {
-            query: sqlQuery,
-            location: 'US'
-        }
+        let sqlQuery = `SELECT * FROM ${keyPairTable} WHERE file_name='${template_file_name}' AND column_name IS NOT NULL`
 
-        let template = await bigQuery.query(option)
+        let template = await runQuery(db, sqlQuery)
         template = template?.flat()
 
         await axios.post(`https://offline-doc-ai-2my7afm7yq-uc.a.run.app`, { gcs_input_uri: fileUrl, formKeyPairTableName: 'schema_form_key_pairs' })
             .then(async () => {
                 sqlQuery = `SELECT * FROM  ${keyPairTable} WHERE file_name='${fileName}'`
-                option.query = sqlQuery
 
-                var formData = await bigQuery.query(option)
+                var formData = await runQuery(db, sqlQuery)
                 formData = formData?.flat()
 
                 var { matchObj, matchValidated } = await matchTemplate(template, formData)
@@ -569,12 +492,10 @@ const formMatching = async (obj) => {
                 columnValues = columnValues.map(v => validateData(v))
 
                 sqlQuery = `INSERT INTO \`${bQTable}.${table_name}\` (${columnNames}) VALUES (${columnValues})`
-                option.query = sqlQuery
-                await bigQuery.query(option)
+                await runQuery(db, sqlQuery)
 
                 for (var [key, value] of Object.entries(matchValidated)) {
-                    option.query = `UPDATE ${keyPairTable} SET validated_field_name='${value}' WHERE file_name='${fileName}' AND field_name='${key}'`
-                    await bigQuery.query(option)
+                    await runQuery(db, sqlQuery)
                 }
                 console.log('done')
             })
@@ -584,11 +505,7 @@ const formMatching = async (obj) => {
     }
 }
 
-const formLoop = async (arr, is_custom) => {
-    let option = {
-        query: ``,
-        location: 'US'
-    }
+const formLoop = async (arr, is_custom, db) => {
     let opt
 
     console.log('arr', arr?.length)
@@ -609,7 +526,6 @@ const formLoop = async (arr, is_custom) => {
 
     let response = await Promise.allSettled(myPromises)
     console.log('response***', response)
-    // option.query = ``
 
     let secondPromise = []
 
@@ -645,8 +561,8 @@ const formLoop = async (arr, is_custom) => {
 
     let ids = arr.map(d => `'${d?.fileId}'`)
 
-    option.query = `UPDATE \`${projectId}.context_oltp.artifact\` SET is_completed = ${true} WHERE id IN (${ids})`
-    await bigQuery.query(option)
+    let sqlQuery = `UPDATE artifact SET is_completed = ${true} WHERE id IN (${ids})`
+    await runQuery(db, sqlQuery)
         .then((res) => console.log('res complete', res))
         .catch((e) => console.log('e', e))
 
@@ -745,11 +661,10 @@ const createSchedule = async ({ uri, method = 'POST', schedule = '*/5 * * * *', 
     })
 }
 
-const setProcessingStatus = ({ status, id, additonalKeys }) => {
-    let sqlQuery = `UPDATE ${DB}.artifact SET updated_at=CURRENT_DATETIME(), importing_status='${PROCESSING}' ${additonalKeys || ''} WHERE id='${id}'`
+const setProcessingStatus = ({ status, id, additonalKeys }, db) => {
+    let sqlQuery = `UPDATE artifact SET updated_at=CURRENT_DATETIME(), importing_status='${PROCESSING}' ${additonalKeys || ''} WHERE id='${id}'`
 
-    option.query = sqlQuery
-    return bigQuery.query(option)
+    return db.query(sqlQuery)
 }
 
 
@@ -841,8 +756,6 @@ module.exports = {
     getUniqueArrayOfObjects,
     getAuthUrl,
     validateData,
-    emailText,
-    forgotEmail,
     updateToken,
     addToken,
     getTemplateData,

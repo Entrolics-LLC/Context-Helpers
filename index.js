@@ -1,6 +1,5 @@
 const sequelize = require('./config/db')
 const bigQModels = require('./bigQModels')
-const { runQuery } = require('./helpers')
 
 const connectDB = async () => {
     try {
