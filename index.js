@@ -1,5 +1,6 @@
 const sequelize = require('./config/db')
-const { runQuery } = require('./helpers')
+const gcpConfig = require('./config/gcpConfig')
+const bigQModels = require('./bigQModels')
 
 const connectDB = async () => {
     try {
@@ -22,5 +23,7 @@ const connectDB = async () => {
 
 module.exports = {
     ...require('./helpers'),
-    sequelize
+    gcpConfig,
+    sequelize,
+    bigQModels
 }
