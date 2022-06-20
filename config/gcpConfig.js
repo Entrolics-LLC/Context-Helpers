@@ -5,7 +5,7 @@ const Vision = require('@google-cloud/vision')
 
 let projectId, workFlowClient, flowExecutionClient, visionClient, DocAIclient, client
 
-const gcpConfigInit = (service_key) => {
+const init = (service_key) => {
     projectId = service_key.project_id
 
     workFlowClient = new WorkflowsClient({
@@ -36,7 +36,7 @@ const gcpConfigInit = (service_key) => {
 
 
 module.exports = {
-    gcpConfigInit,
+    init,
     projectId,
     workFlowClient,
     flowExecutionClient,
