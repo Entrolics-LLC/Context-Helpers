@@ -742,7 +742,7 @@ const parseVideoData = (json) => (
 )
 
 module.exports = {
-    ...require('./postgresQueries'),
+    runBigQuery,
     parseVideoData,
     getVideoJSONKeys,
     getProjectDetails,
