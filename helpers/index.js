@@ -221,8 +221,8 @@ const updateToken = async (id, db) => {
 
         let user = await runQuery(db, sqlQuery)
 
-        if (user[0].length > 0) {
-            user = user[0][0]
+        if (user.length > 0) {
+            user = user[0]
             if (user?.access_token) {
                 let decoded = jwt.decode(user?.access_token, tokenSecret)
                 if (decoded.exp >= moment().valueOf()) {

@@ -1,6 +1,6 @@
-const { BigQuery } = require('@google-cloud/bigquery')
 const isNull = require('../isNull')
 const { projectId } = require('../../config/gcpConfig')
+const { runQuery } = require('../postgresQueries')
 
 const options = {
     keyFilename: process.env.keyFilename,
@@ -9,9 +9,8 @@ const options = {
 
 const str_validated_field_name = 'validated_field_name'
 const str_validated_field_value = 'validated_field_value'
-const bigQuery = new BigQuery(options)
 
-exports.shouldFieldUpdate = async (req) => {
+exports.shouldFieldUpdate = async (req, db) => {
     return new Promise(async (resolve, reject) => {
         let body = req?.body
         let id = body?.id
@@ -23,13 +22,8 @@ exports.shouldFieldUpdate = async (req) => {
         const sqlQuery = `SELECT * FROM \`${projectId}.context.schema_form_key_pairs\` WHERE id='${id}'`
         console.log(`body => `, body, `query `, sqlQuery)
 
-        const option = {
-            location: 'US',
-            query: sqlQuery,
-        }
-
         if (id) {
-            let queryResults = await bigQuery.query(option)
+            let queryResults = await runQuery(db, sqlQuery)
             let key_pair = queryResults?.flat()?.[0]
 
             let previousFieldName = key_pair?.[str_validated_field_name]
