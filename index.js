@@ -22,7 +22,6 @@ const connectDB = async () => {
 
 module.exports = {
     ...require('./helpers'),
-    ...require('./config'),
     sequelize,
     bigQModels
 }
