@@ -711,10 +711,6 @@ const getProjectFlow = (flow_id) => {
 
 const folderRecursive = async (client, folderEntries, service_key) => {
     let fileAndFolders = []
-    const client = new scheduler.CloudSchedulerClient({
-        projectId: service_key.project_id,
-        credentials: service_key
-    })
 
     for (var i in folderEntries) {
         if (folderEntries[i]?.type === 'folder') {
