@@ -2,16 +2,22 @@ const { v4: uuidv4 } = require('uuid')
 const axios = require('axios')
 const Fuse = require('fuse.js')
 const _ = require('lodash')
-const { Storage } = require('@google-cloud/storage')
+const scheduler = require('@google-cloud/scheduler')
+const { DocumentProcessorServiceClient } = require('@google-cloud/documentai').v1beta3
+const { WorkflowsClient, ExecutionsClient } = require('@google-cloud/workflows')
+const Vision = require('@google-cloud/vision')
 const moment = require('moment')
 var jwt = require('jwt-simple')
 const isNull = require('./isNull')
 const { runQuery } = require('./postgresQueries')
-const { projectId, workFlowClient, flowExecutionClient, visionClient, DocAIclient } = require('../config/gcpConfig')
 
-const getGoogleFlow = (name) => (
+const getGoogleFlow = (name, service_key) => (
     new Promise(async (resolve, reject) => {
         try {
+            const workFlowClient = new WorkflowsClient({
+                projectId: service_key.project_id,
+                credentials: service_key
+            })
             const [response] = await workFlowClient.getWorkflow({ name })
             resolve(response)
         }
@@ -21,10 +27,14 @@ const getGoogleFlow = (name) => (
     })
 )
 
-const getGoogleFlowExecutions = (parent) => (
+const getGoogleFlowExecutions = (parent, service_key) => (
 
     new Promise(async (resolve, reject) => {
         try {
+            const flowExecutionClient = new ExecutionsClient({
+                projectId: service_key.project_id,
+                credentials: service_key
+            })
             const [response] = await flowExecutionClient.listExecutions({ parent, view: 'FULL' })
             resolve(response)
         }
@@ -34,9 +44,13 @@ const getGoogleFlowExecutions = (parent) => (
     })
 )
 
-const imageTextDetection = (destination) => {
+const imageTextDetection = (destination, service_key) => {
     return new Promise(async (resolve, reject) => {
         try {
+            const visionClient = new Vision.ImageAnnotatorClient({
+                projectId: service_key.project_id,
+                credentials: service_key
+            })
             const [result] = await visionClient.textDetection(destination)
             resolve(result)
         }
@@ -46,11 +60,15 @@ const imageTextDetection = (destination) => {
     })
 }
 
-const getDocumentAIProcessorsList = () => {
+const getDocumentAIProcessorsList = (service_key) => {
     //https://googleapis.dev/nodejs/documentai/latest/v1beta3.DocumentProcessorServiceClient.html#listProcessors
     return new Promise(async (resolve, reject) => {
         try {
             const docAIParent = `projects/${projectId}/locations/us`
+            const DocAIclient = new DocumentProcessorServiceClient({
+                projectId,
+                credentials: service_key
+            })
             let d = await DocAIclient.listProcessors({ parent: docAIParent })
             let noNulls = d?.filter(Boolean)?.flat()
 
@@ -99,14 +117,12 @@ let minutes = process.env.NODE_ENV === 'production' ? 15 : 60
 
 const origin = process.env?.NODE_ENV ? `https://context-2my7afm7yq-ue.a.run.app` : 'http://localhost:3000'
 
-const readStorage = new Storage({ keyFilename: process.env.keyFilename })
-
-const getAuthUrl = async (uri) => {
+const getAuthUrl = async (uri, storage) => {
     if (uri && uri.length) {
         try {
             const expires = moment(moment(), 'MM-DD-YYYY').add(2, 'days')
             const bucketName = uri.split('/')[2]
-            const myBucket = readStorage.bucket(bucketName)
+            const myBucket = storage.bucket(bucketName)
 
             const config = {
                 action: 'read',
@@ -629,9 +645,13 @@ const COMPLETED = 'COMPLETED'
 const PROCESSING = 'PROCESSING'
 const FAILED = 'FAILED'
 
-const createSchedule = async ({ uri, method = 'POST', schedule = '*/5 * * * *', id }) => {
+const createSchedule = async ({ uri, method = 'POST', schedule = '*/5 * * * *', id }, service_key) => {
     return new Promise(async (resolve, reject) => {
         try {
+            const client = new scheduler.CloudSchedulerClient({
+                projectId: service_key.project_id,
+                credentials: service_key
+            })
             const parent = client.locationPath(projectId, 'us-central1')
             const job = {
                 httpTarget: {
@@ -689,8 +709,12 @@ const getProjectFlow = (flow_id) => {
 
 }
 
-const folderRecursive = async (client, folderEntries) => {
+const folderRecursive = async (client, folderEntries, service_key) => {
     let fileAndFolders = []
+    const client = new scheduler.CloudSchedulerClient({
+        projectId: service_key.project_id,
+        credentials: service_key
+    })
 
     for (var i in folderEntries) {
         if (folderEntries[i]?.type === 'folder') {
