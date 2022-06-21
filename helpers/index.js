@@ -9,6 +9,7 @@ const Vision = require('@google-cloud/vision')
 const moment = require('moment')
 var jwt = require('jwt-simple')
 const isNull = require('./isNull')
+const codes = require('./codes.json')
 const { runQuery } = require('./postgresQueries')
 
 const getGoogleFlow = (name, service_key) => (
@@ -746,6 +747,9 @@ const parseVideoData = (json) => (
     })?.flat?.()
 )
 
+const apiResponse = (res, code, obj, message = null) => res?.status(code)?.send({ ...obj, message: message || codes[code] || codes[500] })
+
+
 module.exports = {
     runQuery,
     parseVideoData,
@@ -774,5 +778,6 @@ module.exports = {
     doesDocAIProcessorExist,
     getGoogleFlow,
     getGoogleFlowExecutions,
-    folderRecursive
+    folderRecursive,
+    apiResponse
 }
