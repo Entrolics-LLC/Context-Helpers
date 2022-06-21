@@ -747,7 +747,7 @@ const parseVideoData = (json) => (
     })?.flat?.()
 )
 
-const apiResponse = (res, code, obj, message = null) => res?.status(code)?.send({ ...obj, message: obj?.message || message || codes[code] || codes[500] })
+const apiResponse = (res, code, obj = {}, message = null) => res?.status(code)?.send({ ...obj, message: obj?.message || message || codes[code] || codes[500] })
 
 const successFalse = (res, message, code = 500) => {
     let obj = {
