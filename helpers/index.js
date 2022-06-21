@@ -749,6 +749,15 @@ const parseVideoData = (json) => (
 
 const apiResponse = (res, code, obj, message = null) => res?.status(code)?.send({ ...obj, message: obj?.message || message || codes[code] || codes[500] })
 
+const successFalse = (res, message, code = 500) => {
+    let obj = {
+        success: false,
+        message
+    }
+
+    return apiResponse(res, code || 500, obj)
+}
+
 
 module.exports = {
     runQuery,
@@ -779,5 +788,6 @@ module.exports = {
     getGoogleFlow,
     getGoogleFlowExecutions,
     folderRecursive,
-    apiResponse
+    apiResponse,
+    successFalse
 }
