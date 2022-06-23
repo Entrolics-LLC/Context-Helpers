@@ -1,6 +1,6 @@
 const { Sequelize } = require('sequelize')
 const exec = require('child_process').exec
-const config = require('./config')
+const config = require('./config.json').development
 const addModels = require('../models')
 
 const init = (cloudConfig = config) => {
