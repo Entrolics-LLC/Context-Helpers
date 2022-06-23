@@ -36,7 +36,7 @@ const createDB = () => {
     })
 }
 
-const migrateDB = (config) => {
+const migrateDB = () => {
     try {
         exec('cd node_modules && cd context-helpers && npm run createMigration', (error, stdout, stderr) => {
             console.log('stdout: ' + stdout)
