@@ -1,7 +1,7 @@
 {
     "username": "postgres",
     "password": "postgres",
-    "database": "context_oltp",
+    "database": "postgres",
     "host": "localhost",
     "dialect": "postgres",
     "port": 5432

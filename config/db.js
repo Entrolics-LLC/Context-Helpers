@@ -26,15 +26,15 @@ const init = (cloudConfig = config) => {
     }
 }
 
-const createDB = () => {
-    exec('cd node_modules && cd context-helpers && npm run createDB', (error, stdout, stderr) => {
-        console.log('stdout: ' + stdout)
-        console.log('stderr: ' + stderr)
-        if (error !== null) {
-            console.log('exec error: ' + error)
-        }
-    })
-}
+// const createDB = () => {
+//     exec('cd node_modules && cd context-helpers && npm run createDB', (error, stdout, stderr) => {
+//         console.log('stdout: ' + stdout)
+//         console.log('stderr: ' + stderr)
+//         if (error !== null) {
+//             console.log('exec error: ' + error)
+//         }
+//     })
+// }
 
 const migrateDB = () => {
     try {
@@ -65,6 +65,5 @@ const migrateDB = () => {
 
 module.exports = {
     init,
-    migrateDB,
-    createDB
+    migrateDB
 }
