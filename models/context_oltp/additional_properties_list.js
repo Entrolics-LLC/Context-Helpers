@@ -16,17 +16,17 @@ module.exports = (sequelize, DataTypes) => {
   additional_properties_list.init({
     property_id: DataTypes.STRING,
     options: DataTypes.STRING,
-    created_at:  {
+    created_at: {
       type: DataTypes.DATE,
       allowNull: false
     },
-    updated_at:  {
+    updated_at: {
       type: DataTypes.DATE,
       allowNull: false
     }
   }, {
     sequelize,
-    modelName: 'additional_properties_list',
+    modelName: 'additional_properties_list'
   });
   return additional_properties_list;
 };

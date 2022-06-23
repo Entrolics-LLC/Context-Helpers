@@ -25,6 +25,8 @@ module.exports = {
         type: Sequelize.DATE,
         allowNull: false
       }
+    }, {
+      schema: 'context'
     });
   },
   async down(queryInterface, Sequelize) {
