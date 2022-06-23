@@ -14,6 +14,8 @@ module.exports = {
       paragraphs: {
         type: Sequelize.STRING
       }
+    }, {
+      schema: 'context'
     });
   },
   down: async (queryInterface, Sequelize) => {

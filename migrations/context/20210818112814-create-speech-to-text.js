@@ -20,6 +20,8 @@ module.exports = {
       classification_confidence: {
         type: Sequelize.STRING
       }
+    }, {
+      schema: 'context'
     });
   },
   down: async (queryInterface, Sequelize) => {

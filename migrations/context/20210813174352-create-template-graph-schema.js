@@ -26,6 +26,8 @@ module.exports = {
       id: {
         type: Sequelize.STRING
       }
+    }, {
+      schema: 'context'
     });
   },
   down: async (queryInterface, Sequelize) => {

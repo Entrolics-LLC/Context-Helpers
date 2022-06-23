@@ -16,6 +16,8 @@ module.exports = {
       vision_json: {
         type: Sequelize.STRING
       }
+    }, {
+      schema: 'context'
     });
   },
   down: async (queryInterface, Sequelize) => {
