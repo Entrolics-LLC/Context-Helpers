@@ -39,11 +39,11 @@ const init = (cloudConfig = config) => {
 const migrateDB = () => {
     try {
         exec('cd node_modules && cd context-helpers && npm run createMigration', (error, stdout, stderr) => {
-            console.log('stdout: ' + stdout)
-            console.log('stderr: ' + stderr)
-            if (error !== null) {
-                console.log('exec error: ' + error)
-            }
+            // console.log('stdout: ' + stdout)
+            // console.log('stderr: ' + stderr)
+            // if (error !== null) {
+            //     console.log('exec error: ' + error)
+            // }
         })
     }
     catch (e) {
