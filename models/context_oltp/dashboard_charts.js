@@ -21,8 +21,8 @@ module.exports = (sequelize, DataTypes) => {
     },
     layout: DataTypes.STRING,
     name: DataTypes.STRING,
-    vizState: DataTypes.STRING,
-    userId: DataTypes.STRING,
+    viz_state: DataTypes.STRING,
+    user_id: DataTypes.STRING,
     created_at:  {
       type: DataTypes.DATE,
       allowNull: false
