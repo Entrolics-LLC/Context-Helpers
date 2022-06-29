@@ -2,23 +2,16 @@ const { v4: uuidv4 } = require('uuid')
 const axios = require('axios')
 const Fuse = require('fuse.js')
 const _ = require('lodash')
-const scheduler = require('@google-cloud/scheduler')
-const { DocumentProcessorServiceClient } = require('@google-cloud/documentai').v1beta3
-const { WorkflowsClient, ExecutionsClient } = require('@google-cloud/workflows')
-const Vision = require('@google-cloud/vision')
+const { Storage } = require('@google-cloud/storage')
 const moment = require('moment')
 var jwt = require('jwt-simple')
 const isNull = require('./isNull')
-const codes = require('./codes.json')
 const { runQuery } = require('./postgresQueries')
+const { projectId, workFlowClient, flowExecutionClient, visionClient, DocAIclient } = require('../config/gcpConfig')
 
-const getGoogleFlow = (name, service_key) => (
+const getGoogleFlow = (name) => (
     new Promise(async (resolve, reject) => {
         try {
-            const workFlowClient = new WorkflowsClient({
-                projectId: service_key.project_id,
-                credentials: service_key
-            })
             const [response] = await workFlowClient.getWorkflow({ name })
             resolve(response)
         }
@@ -28,14 +21,10 @@ const getGoogleFlow = (name, service_key) => (
     })
 )
 
-const getGoogleFlowExecutions = (parent, service_key) => (
+const getGoogleFlowExecutions = (parent) => (
 
     new Promise(async (resolve, reject) => {
         try {
-            const flowExecutionClient = new ExecutionsClient({
-                projectId: service_key.project_id,
-                credentials: service_key
-            })
             const [response] = await flowExecutionClient.listExecutions({ parent, view: 'FULL' })
             resolve(response)
         }
@@ -45,13 +34,9 @@ const getGoogleFlowExecutions = (parent, service_key) => (
     })
 )
 
-const imageTextDetection = (destination, service_key) => {
+const imageTextDetection = (destination) => {
     return new Promise(async (resolve, reject) => {
         try {
-            const visionClient = new Vision.ImageAnnotatorClient({
-                projectId: service_key.project_id,
-                credentials: service_key
-            })
             const [result] = await visionClient.textDetection(destination)
             resolve(result)
         }
@@ -61,15 +46,11 @@ const imageTextDetection = (destination, service_key) => {
     })
 }
 
-const getDocumentAIProcessorsList = (service_key) => {
+const getDocumentAIProcessorsList = () => {
     //https://googleapis.dev/nodejs/documentai/latest/v1beta3.DocumentProcessorServiceClient.html#listProcessors
     return new Promise(async (resolve, reject) => {
         try {
             const docAIParent = `projects/${projectId}/locations/us`
-            const DocAIclient = new DocumentProcessorServiceClient({
-                projectId,
-                credentials: service_key
-            })
             let d = await DocAIclient.listProcessors({ parent: docAIParent })
             let noNulls = d?.filter(Boolean)?.flat()
 
@@ -118,12 +99,14 @@ let minutes = process.env.NODE_ENV === 'production' ? 15 : 60
 
 const origin = process.env?.NODE_ENV ? `https://context-2my7afm7yq-ue.a.run.app` : 'http://localhost:3000'
 
-const getAuthUrl = async (uri, storage) => {
+const readStorage = new Storage({ keyFilename: process.env.keyFilename })
+
+const getAuthUrl = async (uri) => {
     if (uri && uri.length) {
         try {
             const expires = moment(moment(), 'MM-DD-YYYY').add(2, 'days')
             const bucketName = uri.split('/')[2]
-            const myBucket = storage.bucket(bucketName)
+            const myBucket = readStorage.bucket(bucketName)
 
             const config = {
                 action: 'read',
@@ -288,6 +271,21 @@ const getUniqueArrayOfObjects = (ary, objectPropertName) => {
             return value1 == value2
         })
         return filteredByProperty == index
+    })
+}
+
+const runBigQuery = (query, db) => {
+
+    return new Promise(async (resolve, reject) => {
+        try {
+            let data = await runQuery(db, query)
+            let finalData = (Array.isArray(data) && typeof data?.flat == 'function') ? data?.flat() : []
+
+            return resolve(finalData)
+        }
+        catch (e) {
+            reject(e)
+        }
     })
 }
 
@@ -631,13 +629,9 @@ const COMPLETED = 'COMPLETED'
 const PROCESSING = 'PROCESSING'
 const FAILED = 'FAILED'
 
-const createSchedule = async ({ uri, method = 'POST', schedule = '*/5 * * * *', id }, service_key) => {
+const createSchedule = async ({ uri, method = 'POST', schedule = '*/5 * * * *', id }) => {
     return new Promise(async (resolve, reject) => {
         try {
-            const client = new scheduler.CloudSchedulerClient({
-                projectId: service_key.project_id,
-                credentials: service_key
-            })
             const parent = client.locationPath(projectId, 'us-central1')
             const job = {
                 httpTarget: {
@@ -678,7 +672,7 @@ const setProcessingStatus = ({ status, id, additonalKeys }, db) => {
 const getProjectDetails = (project_id) => {
     if (!isNull(project_id)) {
         const myQuery = `SELECT  * FROM \`context_oltp.projects\` where id='${project_id}'`
-        return runQuery(myQuery)
+        return runBigQuery(myQuery)
     } else {
         throw new Error(`ProjectId is required`)
     }
@@ -688,14 +682,14 @@ const getProjectDetails = (project_id) => {
 const getProjectFlow = (flow_id) => {
     if (!isNull(flow_id)) {
         const myQuery = `SELECT  f.id,f.gflow_id,f.flow_name,f.flow_json, f.flow_description,f.created_at, b.name as bf_name, b.description as bf_description, u.first_name, u.last_name,u.avatar,u.email FROM \`context_oltp.project_workflow\` f LEFT JOIN context.bussiness_functions b ON b.id=f.business_function_id LEFT JOIN context_oltp.users u ON u.id=f.user_id where f.id='${flow_id}'`
-        return runQuery(myQuery)
+        return runBigQuery(myQuery)
     } else {
         throw new Error(`flowid is required`)
     }
 
 }
 
-const folderRecursive = async (client, folderEntries, service_key) => {
+const folderRecursive = async (client, folderEntries) => {
     let fileAndFolders = []
 
     for (var i in folderEntries) {
@@ -747,20 +741,8 @@ const parseVideoData = (json) => (
     })?.flat?.()
 )
 
-const apiResponse = (res, code, obj = {}, message = null) => res?.status(code)?.send({ ...obj, message: obj?.message || message || codes[code] || codes[500] })
-
-const successFalse = (res, message, code = 500) => {
-    let obj = {
-        success: false,
-        message
-    }
-
-    return apiResponse(res, code || 500, obj)
-}
-
-
 module.exports = {
-    runQuery,
+    runBigQuery,
     parseVideoData,
     getVideoJSONKeys,
     getProjectDetails,
@@ -768,6 +750,7 @@ module.exports = {
     arrayIntoBigqueryArray,
     imageTextDetection,
     getDocumentAIProcessorsList,
+    runBigQuery,
     createSchedule,
     setProcessingStatus,
     getUniqueArrayOfObjects,
@@ -787,7 +770,5 @@ module.exports = {
     doesDocAIProcessorExist,
     getGoogleFlow,
     getGoogleFlowExecutions,
-    folderRecursive,
-    apiResponse,
-    successFalse
+    folderRecursive
 }

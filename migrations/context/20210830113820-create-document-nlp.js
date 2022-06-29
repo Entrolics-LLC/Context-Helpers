@@ -35,8 +35,6 @@ module.exports = {
       form_type: {
         type: Sequelize.STRING
       }
-    }, {
-      schema: 'context'
     });
   },
   down: async (queryInterface, Sequelize) => {

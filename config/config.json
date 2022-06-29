@@ -1,16 +1,24 @@
 {
     "development": {
         "username": "postgres",
-        "password": "postgres",
+        "password": "abbas110",
         "database": "postgres",
         "host": "localhost",
         "dialect": "postgres",
         "port": 5432
     },
-    "production": {
+    "context": {
         "username": "postgres",
-        "password": "postgres",
-        "database": "postgres",
+        "password": "abbas110",
+        "database": "context",
+        "host": "localhost",
+        "dialect": "postgres",
+        "port": 5432
+    },
+    "context_oltp": {
+        "username": "postgres",
+        "password": "abbas110",
+        "database": "context_oltp",
         "host": "localhost",
         "dialect": "postgres",
         "port": 5432

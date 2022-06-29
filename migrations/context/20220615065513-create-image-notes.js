@@ -32,9 +32,7 @@ module.exports = {
       type: {
         type: Sequelize.STRING
       }
-    }, {
-      schema: 'context'
-    });
+    })
   },
   async down(queryInterface, Sequelize) {
     await queryInterface.dropTable('image_notes');

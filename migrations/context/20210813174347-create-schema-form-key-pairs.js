@@ -85,8 +85,6 @@ module.exports = {
       column_name: {
         type: Sequelize.STRING
       }
-    }, {
-      schema: 'context'
     });
   },
   down: async (queryInterface, Sequelize) => {

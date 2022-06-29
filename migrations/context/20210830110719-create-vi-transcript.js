@@ -20,8 +20,6 @@ module.exports = {
       word: {
         type: Sequelize.JSON
       }
-    }, {
-      schema: 'context'
     });
   },
   down: async (queryInterface, Sequelize) => {

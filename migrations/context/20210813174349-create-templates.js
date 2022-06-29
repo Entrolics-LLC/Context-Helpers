@@ -48,8 +48,6 @@ module.exports = {
       created_by: {
         type: Sequelize.STRING
       }
-    }, {
-      schema: 'context'
     });
   },
   down: async (queryInterface, Sequelize) => {
