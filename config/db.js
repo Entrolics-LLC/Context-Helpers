@@ -5,7 +5,6 @@ const addModels = require('../models')
 
 const init = (cloudConfig = config) => {
     try {
-        console.log('process.env', process.env.HOST)
         let db = new Sequelize({ ...cloudConfig })
         addModels(db)
 
