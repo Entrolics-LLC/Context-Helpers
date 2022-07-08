@@ -33,13 +33,18 @@
     "start": "NODE_ENV=production node index.js",
     "dev": "node index.js",
     "createDB": "npm run sequelize:context_oltp:create",
+    "createDBProduction": "npm run sequelize:context_oltp_prod:create",
     "createMigration": "npm run sequelize:context_oltp:migrate && npm run sequelize:context:migrate",
+    "createMigrationProduction": "npm run sequelize:context_oltp_prod:migrate && npm run sequelize:context_prod:migrate",
     "createAll": "npm run createDB && npm run createMigration",
+    "createAllProduction": "npm run createDB && npm run createMigration",
     "sequelize:context_oltp:create": "npx sequelize-cli --options-path ./.sequelize-context_oltp --env development db:create",
-    "sequelize:context:create": "npx sequelize-cli --options-path ./.sequelize-context --env development db:create",
     "sequelize:context_oltp:migrate": "npx sequelize-cli --options-path ./.sequelize-context_oltp --env development db:migrate",
     "sequelize:context:migrate": "npx sequelize-cli --options-path ./.sequelize-context --env development db:migrate",
-    "sequelize:context_oltp:migrate:undo": "npx sequelize-cli --options-path ./.sequelize-context_oltp --env development db:migrate:undo"
+    "sequelize:context_oltp:migrate:undo": "npx sequelize-cli --options-path ./.sequelize-context_oltp --env development db:migrate:undo",
+    "sequelize:context_oltp_prod:create": "npx sequelize-cli --options-path ./.sequelize-context_oltp --env production db:create",
+    "sequelize:context_oltp_prod:migrate": "npx sequelize-cli --options-path ./.sequelize-context_oltp --env production db:migrate",
+    "sequelize:context_prod:migrate": "npx sequelize-cli --options-path ./.sequelize-context --env production db:migrate"
   },
   "devDependencies": {
     "sequelize-cli": "^6.4.1"

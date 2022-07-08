@@ -39,7 +39,8 @@ const init = (cloudConfig = config) => {
 
 const migrateDB = () => {
     try {
-        exec('cd node_modules && cd context-helpers && npm run createMigration', (error, stdout, stderr) => {
+        let migration = process.env.NODE_ENV === 'production' ? 'createMigrationProduction' : 'createMigration'
+        exec(`cd node_modules && cd context-helpers && npm run ${migration}`, (error, stdout, stderr) => {
             console.log('stdout: ', stdout)
             console.log('stderr: ', stderr)
             if (error !== null) {
