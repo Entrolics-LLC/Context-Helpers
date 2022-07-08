@@ -7,7 +7,7 @@ const basename = path.basename(__filename)
 
 var models = {}
 
-const addModels = async (db, dbPath = 'context_oltp') => {
+const addModels = async (db) => {
 
   await fs.readdir(__dirname, (err, folders) => {
     if (err) {
