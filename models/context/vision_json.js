@@ -19,7 +19,8 @@ module.exports = (sequelize, DataTypes) => {
     vision_json: DataTypes.STRING
   }, {
     sequelize,
-    modelName: 'vision_json'
+    modelName: 'vision_json',
+    schema: 'context'
   });
   return VisionJson;
 };

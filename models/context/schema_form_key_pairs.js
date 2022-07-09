@@ -48,6 +48,7 @@ module.exports = (sequelize, DataTypes) => {
   }, {
     sequelize,
     modelName: 'schema_form_key_pairs',
+    schema: 'context'
   });
   return SchemaFormKeyPairs;
 };

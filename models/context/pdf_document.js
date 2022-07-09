@@ -22,6 +22,7 @@ module.exports = (sequelize, DataTypes) => {
   }, {
     sequelize,
     modelName: 'pdf_document',
+    schema: 'context'
   });
   return PdfDocument;
 };

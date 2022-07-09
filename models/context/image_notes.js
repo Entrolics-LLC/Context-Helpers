@@ -29,6 +29,7 @@ module.exports = (sequelize, DataTypes) => {
   }, {
     sequelize,
     modelName: 'image_notes',
+    schema: 'context'
   });
   return image_notes;
 };

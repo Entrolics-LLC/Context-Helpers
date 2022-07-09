@@ -29,6 +29,7 @@ module.exports = (sequelize, DataTypes) => {
   }, {
     sequelize,
     modelName: 'bussiness_functions',
+    schema: 'context'
   });
   return bussiness_functions;
 };

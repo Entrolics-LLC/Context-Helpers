@@ -25,6 +25,7 @@ module.exports = (sequelize, DataTypes) => {
   }, {
     sequelize,
     modelName: 'image_explicit',
+    schema: 'context'
   });
   return image_explicit;
 };

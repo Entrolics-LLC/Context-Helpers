@@ -23,6 +23,7 @@ module.exports = (sequelize, DataTypes) => {
   }, {
     sequelize,
     modelName: 'speech_to_txt',
+    schema: 'context'
   });
   return speech_to_text;
 };

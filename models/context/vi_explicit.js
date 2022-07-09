@@ -22,6 +22,7 @@ module.exports = (sequelize, DataTypes) => {
   }, {
     sequelize,
     modelName: 'vi_explicit',
+    schema: 'context'
   });
   return vi_explicit;
 };

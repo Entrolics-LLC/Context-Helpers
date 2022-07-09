@@ -20,6 +20,7 @@ module.exports = (sequelize, DataTypes) => {
   }, {
     sequelize,
     modelName: 'ai_explicit_content',
+    schema: 'context'
   });
   return AiExplicitContent;
 };

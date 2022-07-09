@@ -23,6 +23,7 @@ module.exports = (sequelize, DataTypes) => {
   }, {
     sequelize,
     modelName: 'image_web_entities',
+    schema: 'context'
   });
   return image_web_entities;
 };

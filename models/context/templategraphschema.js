@@ -29,6 +29,7 @@ module.exports = (sequelize, DataTypes) => {
   }, {
     sequelize,
     modelName: 'template_graph_schema',
+    schema: 'context'
   });
   return TemplateGraphSchema;
 };

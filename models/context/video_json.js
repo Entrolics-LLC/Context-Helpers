@@ -20,6 +20,7 @@ module.exports = (sequelize, DataTypes) => {
   }, {
     sequelize,
     modelName: 'video_json',
+    schema: 'context'
   });
   return video_json;
 };

@@ -7,9 +7,9 @@ const basename = path.basename(__filename)
 
 var models = {}
 
-const addModels = async (db) => {
+const addModels = (db) => {
 
-  await fs.readdir(__dirname, (err, folders) => {
+  fs.readdir(__dirname, (err, folders) => {
     if (err) {
       return
     }
@@ -35,6 +35,12 @@ const addModels = async (db) => {
         models[model.name] = model
       }
     }
+
+    Object.keys(models).forEach(modelName => {
+      if (models[modelName].associate) {
+        models[modelName].associate(models);
+      }
+    })
 
     return models
 

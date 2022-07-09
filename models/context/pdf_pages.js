@@ -21,6 +21,7 @@ module.exports = (sequelize, DataTypes) => {
   }, {
     sequelize,
     modelName: 'pdf_pages',
+    schema: 'context'
   });
   return PdfPages;
 };

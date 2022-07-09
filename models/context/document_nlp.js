@@ -28,6 +28,7 @@ module.exports = (sequelize, DataTypes) => {
   }, {
     sequelize,
     modelName: 'document_nlp',
+    schema: 'context'
   });
   return document_nlp;
 };

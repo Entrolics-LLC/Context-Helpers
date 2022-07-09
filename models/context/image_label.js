@@ -22,6 +22,7 @@ module.exports = (sequelize, DataTypes) => {
   }, {
     sequelize,
     modelName: 'image_label',
+    schema: 'context'
   });
   return image_label;
 };
