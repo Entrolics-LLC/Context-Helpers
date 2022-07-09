@@ -789,5 +789,6 @@ module.exports = {
     getGoogleFlowExecutions,
     folderRecursive,
     apiResponse,
-    successFalse
+    successFalse,
+    isNull
 }
