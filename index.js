@@ -16,7 +16,7 @@ const connectDB = async () => {
 
         // let data = await runQuery(db, query)
 
-        // console.log('data', data)
+        console.log('data', db)
     }
     catch (e) {
         console.log('e', e)

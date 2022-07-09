@@ -5,7 +5,7 @@ const addModels = require('../models')
 
 const init = (cloudConfig = config) => {
     try {
-        let db = new Sequelize({ ...cloudConfig })
+        let db = new Sequelize({ ...cloudConfig, ssl: true, pool: { maxConnections: 5, maxIdleTime: 30 }, language: 'en' })
         addModels(db)
 
         console.log('connecting...')
