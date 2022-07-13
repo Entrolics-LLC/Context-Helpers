@@ -24,7 +24,9 @@ module.exports = (sequelize, DataTypes) => {
   }, {
     sequelize,
     modelName: 'vi_label',
-    schema: 'context'
+    schema: 'context',
+    createdAt: false,
+    updatedAt: false
   });
   return vi_label;
 };

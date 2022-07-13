@@ -39,6 +39,8 @@ module.exports = (sequelize, DataTypes) => {
   }, {
     sequelize,
     modelName: 'flow_schedule',
+    createdAt: false,
+    updatedAt: false
   });
   return flow_schedule;
 };

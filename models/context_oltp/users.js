@@ -55,6 +55,8 @@ module.exports = (sequelize, DataTypes) => {
   }, {
     sequelize,
     modelName: 'users',
+    createdAt: false,
+    updatedAt: false
   });
   return users;
 };

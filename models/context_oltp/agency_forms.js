@@ -37,6 +37,8 @@ module.exports = (sequelize, DataTypes) => {
   }, {
     sequelize,
     modelName: 'agency_forms',
+    createdAt: false,
+    updatedAt: false
   });
   return agency_forms;
 };

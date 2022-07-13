@@ -30,6 +30,8 @@ module.exports = (sequelize, DataTypes) => {
   }, {
     sequelize,
     modelName: 'keyword_notification',
+    createdAt: false,
+    updatedAt: false
   });
   return keyword_notification;
 };

@@ -32,6 +32,8 @@ module.exports = (sequelize, DataTypes) => {
   }, {
     sequelize,
     modelName: 'project_keyword',
+    createdAt: false,
+    updatedAt: false
   });
   return project_keyword;
 };

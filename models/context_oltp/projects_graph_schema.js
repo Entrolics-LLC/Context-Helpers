@@ -38,6 +38,8 @@ module.exports = (sequelize, DataTypes) => {
   }, {
     sequelize,
     modelName: 'projects_graph_schema',
+    createdAt: false,
+    updatedAt: false
   });
   return projects_graph_schema;
 };

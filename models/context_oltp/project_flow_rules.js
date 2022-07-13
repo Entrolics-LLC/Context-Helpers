@@ -34,6 +34,8 @@ module.exports = (sequelize, DataTypes) => {
   }, {
     sequelize,
     modelName: 'project_flow_rules',
+    createdAt: false,
+    updatedAt: false
   });
   return project_flow_rules;
 };

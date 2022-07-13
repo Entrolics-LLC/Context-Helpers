@@ -32,6 +32,8 @@ module.exports = (sequelize, DataTypes) => {
   }, {
     sequelize,
     modelName: 'bookmarks',
+    createdAt: false,
+    updatedAt: false
   });
   return bookmarks;
 };

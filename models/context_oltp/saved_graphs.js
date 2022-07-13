@@ -33,6 +33,8 @@ module.exports = (sequelize, DataTypes) => {
   }, {
     sequelize,
     modelName: 'saved_graphs',
+    createdAt: false,
+    updatedAt: false
   });
   return saved_graphs;
 };

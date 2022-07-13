@@ -26,6 +26,8 @@ module.exports = (sequelize, DataTypes) => {
   }, {
     sequelize,
     modelName: 'artifact_null_fields',
+    createdAt: false,
+    updatedAt: false
   });
   return artifact_null_fields;
 };

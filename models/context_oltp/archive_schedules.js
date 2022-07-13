@@ -36,6 +36,8 @@ module.exports = (sequelize, DataTypes) => {
   }, {
     sequelize,
     modelName: 'archive_schedules',
+    createdAt: false,
+    updatedAt: false
   });
   return archive_schedules;
 };

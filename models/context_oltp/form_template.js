@@ -31,6 +31,8 @@ module.exports = (sequelize, DataTypes) => {
   }, {
     sequelize,
     modelName: 'form_template',
+    createdAt: false,
+    updatedAt: false
   });
   return form_template;
 };

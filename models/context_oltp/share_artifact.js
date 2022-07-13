@@ -21,6 +21,8 @@ module.exports = (sequelize, DataTypes) => {
   }, {
     sequelize,
     modelName: 'share_artifact',
+    createdAt: false,
+    updatedAt: false
   });
   return share_artifact;
 };

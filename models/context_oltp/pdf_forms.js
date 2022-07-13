@@ -37,6 +37,8 @@ module.exports = (sequelize, DataTypes) => {
   }, {
     sequelize,
     modelName: 'pdf_forms',
+    createdAt: false,
+    updatedAt: false
   });
   return pdf_forms;
 };

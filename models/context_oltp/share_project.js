@@ -32,6 +32,8 @@ module.exports = (sequelize, DataTypes) => {
   }, {
     sequelize,
     modelName: 'share_project',
+    createdAt: false,
+    updatedAt: false
   });
   return share_project;
 };

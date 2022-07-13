@@ -55,6 +55,8 @@ module.exports = (sequelize, DataTypes) => {
   }, {
     sequelize,
     modelName: 'my_first_dbt_model',
+    createdAt: false,
+    updatedAt: false
   });
   return my_first_dbt_model;
 };

@@ -29,6 +29,8 @@ module.exports = (sequelize, DataTypes) => {
   }, {
     sequelize,
     modelName: 'file_properties',
+    createdAt: false,
+    updatedAt: false
   });
   return file_properties;
 };

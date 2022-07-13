@@ -29,6 +29,8 @@ module.exports = (sequelize, DataTypes) => {
   }, {
     sequelize,
     modelName: 'workflow_rules',
+    createdAt: false,
+    updatedAt: false
   });
   return workflow_rules;
 };

@@ -36,6 +36,8 @@ module.exports = (sequelize, DataTypes) => {
   }, {
     sequelize,
     modelName: 'user_widgets',
+    createdAt: false,
+    updatedAt: false
   });
   return user_widgets;
 };

@@ -15,10 +15,10 @@ module.exports = (sequelize, DataTypes) => {
   }
   Templates.init({
     id: {
-        allowNull: false,
-        primaryKey: true,
-        type: DataTypes.STRING
-      },
+      allowNull: false,
+      primaryKey: true,
+      type: DataTypes.STRING
+    },
     template_name: DataTypes.STRING,
     file_address: DataTypes.STRING,
     is_custom: DataTypes.BOOLEAN,
@@ -41,7 +41,9 @@ module.exports = (sequelize, DataTypes) => {
   }, {
     sequelize,
     modelName: 'templates',
-    schema: 'context'
+    schema: 'context',
+    createdAt: false,
+    updatedAt: false
   });
   return Templates;
 };

@@ -36,6 +36,8 @@ module.exports = (sequelize, DataTypes) => {
   }, {
     sequelize,
     modelName: 'approve_artifact',
+    createdAt: false,
+    updatedAt: false
   });
   return approve_artifact;
 };

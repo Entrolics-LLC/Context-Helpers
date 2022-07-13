@@ -21,12 +21,12 @@ module.exports = (sequelize, DataTypes) => {
     },
     agency_name: DataTypes.STRING,
     agency_acronym: DataTypes.STRING,
-    created_at:  {
+    created_at: {
       type: DataTypes.DATE,
       allowNull: false
     },
     created_by: DataTypes.STRING,
-    updated_at:  {
+    updated_at: {
       type: DataTypes.DATE,
       allowNull: false
     },
@@ -34,6 +34,8 @@ module.exports = (sequelize, DataTypes) => {
   }, {
     sequelize,
     modelName: 'agencies',
+    createdAt: false,
+    updatedAt: false
   });
   return agencies;
 };

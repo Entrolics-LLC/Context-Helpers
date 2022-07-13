@@ -29,6 +29,8 @@ module.exports = (sequelize, DataTypes) => {
   }, {
     sequelize,
     modelName: 'workspace_chat',
+    createdAt: false,
+    updatedAt: false
   });
   return workspace_chat;
 };

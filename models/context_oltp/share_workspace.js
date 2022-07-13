@@ -35,6 +35,8 @@ module.exports = (sequelize, DataTypes) => {
   }, {
     sequelize,
     modelName: 'share_workspace',
+    createdAt: false,
+    updatedAt: false
   });
   return share_workspace;
 };

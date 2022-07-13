@@ -21,17 +21,19 @@ module.exports = (sequelize, DataTypes) => {
     },
     property_name: DataTypes.STRING,
     property_type: DataTypes.STRING,
-    created_at:  {
+    created_at: {
       type: DataTypes.DATE,
       allowNull: false
     },
-    updated_at:  {
+    updated_at: {
       type: DataTypes.DATE,
       allowNull: false
     }
   }, {
     sequelize,
     modelName: 'additional_properties',
+    createdAt: false,
+    updatedAt: false
   });
   return additional_properties;
 };

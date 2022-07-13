@@ -32,6 +32,8 @@ module.exports = (sequelize, DataTypes) => {
   }, {
     sequelize,
     modelName: 'artifact_types',
+    createdAt: false,
+    updatedAt: false
   });
   return artifact_types;
 };

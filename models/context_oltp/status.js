@@ -32,6 +32,8 @@ module.exports = (sequelize, DataTypes) => {
   }, {
     sequelize,
     modelName: 'status',
+    createdAt: false,
+    updatedAt: false
   });
   return status;
 };

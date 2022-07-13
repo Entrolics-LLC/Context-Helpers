@@ -37,6 +37,8 @@ module.exports = (sequelize, DataTypes) => {
   }, {
     sequelize,
     modelName: 'user_artifact_comments',
+    createdAt: false,
+    updatedAt: false
   });
   return user_artifact_comments;
 };

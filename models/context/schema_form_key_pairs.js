@@ -33,10 +33,10 @@ module.exports = (sequelize, DataTypes) => {
     value_y2: DataTypes.FLOAT,
     pageNumber: DataTypes.INTEGER,
     id: {
-        allowNull: false,
-        primaryKey: true,
-        type: DataTypes.STRING
-      },
+      allowNull: false,
+      primaryKey: true,
+      type: DataTypes.STRING
+    },
     type: DataTypes.STRING,
     field_name_confidence: DataTypes.STRING,
     field_value_confidence: DataTypes.STRING,
@@ -48,7 +48,9 @@ module.exports = (sequelize, DataTypes) => {
   }, {
     sequelize,
     modelName: 'schema_form_key_pairs',
-    schema: 'context'
+    schema: 'context',
+    createdAt: false,
+    updatedAt: false
   });
   return SchemaFormKeyPairs;
 };

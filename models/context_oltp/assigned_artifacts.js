@@ -32,6 +32,8 @@ module.exports = (sequelize, DataTypes) => {
   }, {
     sequelize,
     modelName: 'assigned_artifacts',
+    createdAt: false,
+    updatedAt: false
   });
   return assigned_artifacts;
 };

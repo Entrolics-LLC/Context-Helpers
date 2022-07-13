@@ -35,6 +35,8 @@ module.exports = (sequelize, DataTypes) => {
   }, {
     sequelize,
     modelName: 'bigQueryML',
+    createdAt: false,
+    updatedAt: false
   });
   return bigQueryML;
 };

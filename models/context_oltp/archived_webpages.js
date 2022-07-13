@@ -29,6 +29,8 @@ module.exports = (sequelize, DataTypes) => {
   }, {
     sequelize,
     modelName: 'archived_webpages',
+    createdAt: false,
+    updatedAt: false
   });
   return archived_webpages;
 };

@@ -34,6 +34,8 @@ module.exports = (sequelize, DataTypes) => {
   }, {
     sequelize,
     modelName: 'folders',
+    createdAt: false,
+    updatedAt: false
   });
   return folders;
 };

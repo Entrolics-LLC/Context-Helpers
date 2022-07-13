@@ -26,6 +26,8 @@ module.exports = (sequelize, DataTypes) => {
   }, {
     sequelize,
     modelName: 'dlp_xml',
+    createdAt: false,
+    updatedAt: false
   });
   return dlp_xml;
 };

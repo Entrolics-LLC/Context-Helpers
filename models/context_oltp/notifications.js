@@ -33,6 +33,8 @@ module.exports = (sequelize, DataTypes) => {
   }, {
     sequelize,
     modelName: 'notifications',
+    createdAt: false,
+    updatedAt: false
   });
   return notifications;
 };

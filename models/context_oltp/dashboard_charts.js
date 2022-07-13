@@ -34,6 +34,8 @@ module.exports = (sequelize, DataTypes) => {
   }, {
     sequelize,
     modelName: 'dashboard_charts',
+    createdAt: false,
+    updatedAt: false
   });
   return dashboard_charts;
 };

@@ -34,6 +34,8 @@ module.exports = (sequelize, DataTypes) => {
   }, {
     sequelize,
     modelName: 'flow_datablocks',
+    createdAt: false,
+    updatedAt: false
   });
   return flow_datablocks;
 };

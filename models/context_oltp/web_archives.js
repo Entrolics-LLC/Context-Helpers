@@ -30,6 +30,8 @@ module.exports = (sequelize, DataTypes) => {
   }, {
     sequelize,
     modelName: 'web_archives',
+    createdAt: false,
+    updatedAt: false
   });
   return web_archives;
 };

@@ -27,6 +27,8 @@ module.exports = (sequelize, DataTypes) => {
   }, {
     sequelize,
     modelName: 'project_properties',
+    createdAt: false,
+    updatedAt: false
   });
   return project_properties;
 };

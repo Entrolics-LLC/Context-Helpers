@@ -26,7 +26,9 @@ module.exports = (sequelize, DataTypes) => {
     }
   }, {
     sequelize,
-    modelName: 'additional_properties_list'
+    modelName: 'additional_properties_list',
+    createdAt: false,
+    updatedAt: false
   });
   return additional_properties_list;
 };

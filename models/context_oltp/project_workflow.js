@@ -32,6 +32,8 @@ module.exports = (sequelize, DataTypes) => {
   }, {
     sequelize,
     modelName: 'project_workflow',
+    createdAt: false,
+    updatedAt: false
   });
   return project_workflow;
 };

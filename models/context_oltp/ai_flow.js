@@ -33,6 +33,8 @@ module.exports = (sequelize, DataTypes) => {
   }, {
     sequelize,
     modelName: 'ai_flow',
+    createdAt: false,
+    updatedAt: false
   });
   return ai_flow;
 };

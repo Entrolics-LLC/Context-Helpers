@@ -35,6 +35,8 @@ module.exports = (sequelize, DataTypes) => {
   }, {
     sequelize,
     modelName: 'external_source_connections',
+    createdAt: false,
+    updatedAt: false
   });
   return external_source_connections;
 };

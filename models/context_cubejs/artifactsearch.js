@@ -27,16 +27,18 @@ module.exports = (sequelize, DataTypes) => {
     file_address: DataTypes.STRING,
     user_id: DataTypes.STRING,
     id: {
-        allowNull: false,
-        primaryKey: true,
-        type: DataTypes.STRING
-      },
+      allowNull: false,
+      primaryKey: true,
+      type: DataTypes.STRING
+    },
     folder_id: DataTypes.STRING,
     project_id: DataTypes.STRING,
     details: DataTypes.STRING
   }, {
     sequelize,
     modelName: 'ArtifactSearch',
+    createdAt: false,
+    updatedAt: false
   });
   return ArtifactSearch;
 };

@@ -27,6 +27,8 @@ module.exports = (sequelize, DataTypes) => {
   }, {
     sequelize,
     modelName: 'share_folder',
+    createdAt: false,
+    updatedAt: false
   });
   return share_folder;
 };

@@ -34,6 +34,8 @@ module.exports = (sequelize, DataTypes) => {
   }, {
     sequelize,
     modelName: 'workspaces',
+    createdAt: false,
+    updatedAt: false
   });
   return workspaces;
 };
