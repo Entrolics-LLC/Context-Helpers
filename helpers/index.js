@@ -299,7 +299,7 @@ const getTemplateData = async (fileUrl, id, processorId, db) => {
                 try {
                     sqlQuery = `SELECT * FROM  artifact WHERE id='${id}'`
                     let template = await runQuery(db, sqlQuery)
-                    sqlQuery = `SELECT * FROM  ${keyPairTable} WHERE file_name='${template?.artifact_name}'`
+                    sqlQuery = `SELECT * FROM  context.schema_form_key_pairs WHERE file_name='${template?.artifact_name}'`
                     let keyPairs = await runQuery(db, sqlQuery)
                     let file_address = await getAuthUrl(template.file_address)
                     template.file_address = file_address
