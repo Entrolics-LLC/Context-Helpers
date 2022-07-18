@@ -21,7 +21,7 @@ module.exports = {
         type: Sequelize.STRING
       },
       rules: {
-        type: Sequelize.STRING
+        type: DataTypes.ARRAY(DataTypes.STRING)
       },
       created_at: {
         type: Sequelize.DATE

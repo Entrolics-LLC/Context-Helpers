@@ -2,6 +2,7 @@
 const {
   Model
 } = require('sequelize');
+
 module.exports = (sequelize, DataTypes) => {
   class bussiness_functions extends Model {
     /**
@@ -21,7 +22,7 @@ module.exports = (sequelize, DataTypes) => {
     },
     name: DataTypes.STRING,
     description: DataTypes.STRING,
-    rules: DataTypes.STRING,
+    rules: DataTypes.ARRAY(DataTypes.STRING),
     created_at: {
       type: DataTypes.DATE,
       allowNull: false
