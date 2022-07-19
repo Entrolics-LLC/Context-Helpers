@@ -7,7 +7,7 @@ module.exports = {
         primaryKey: true
       },
       options: {
-        type: Sequelize.STRING
+        type: Sequelize.ARRAY(Sequelize.STRING)
       },
       created_at: {
         type: Sequelize.DATE,

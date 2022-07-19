@@ -18,7 +18,7 @@ module.exports = (sequelize, DataTypes) => {
       type: DataTypes.STRING,
       primaryKey: true
     },
-    options: DataTypes.STRING,
+    options: DataTypes.ARRAY(DataTypes.STRING),
     created_at: {
       type: DataTypes.DATE,
       allowNull: false
