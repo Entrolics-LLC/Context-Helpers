@@ -37,7 +37,8 @@ module.exports = (sequelize, DataTypes) => {
     visibility: DataTypes.STRING,
     shared_with: DataTypes.STRING,
     shared_with_users: DataTypes.STRING,
-    created_by: DataTypes.STRING
+    created_by: DataTypes.STRING,
+    is_deleted: DataTypes.BOOLEAN
   }, {
     sequelize,
     modelName: 'templates',

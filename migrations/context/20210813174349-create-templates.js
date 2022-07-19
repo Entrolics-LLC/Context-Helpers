@@ -47,6 +47,9 @@ module.exports = {
       },
       created_by: {
         type: Sequelize.STRING
+      },
+      is_deleted: {
+        type: Sequelize.BOOLEAN
       }
     }, {
       schema: 'context'
