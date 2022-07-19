@@ -14,13 +14,16 @@ module.exports = (sequelize, DataTypes) => {
     }
   }
   project_properties.init({
-    project_id: DataTypes.STRING,
-    additional_properties_id: DataTypes.STRING,
-    created_at:  {
+    project_id: {
+      type: DataTypes.STRING,
+      primaryKey: true
+    },
+    additional_properties_id: DataTypes.ARRAY(DataTypes.STRING),
+    created_at: {
       type: DataTypes.DATE,
       allowNull: false
     },
-    updated_at:  {
+    updated_at: {
       type: DataTypes.DATE,
       allowNull: false
     }
@@ -28,7 +31,8 @@ module.exports = (sequelize, DataTypes) => {
     sequelize,
     modelName: 'project_properties',
     createdAt: false,
-    updatedAt: false
+    updatedAt: false,
+    id: false
   });
   return project_properties;
 };

@@ -44,7 +44,7 @@ module.exports = {
         type: Sequelize.STRING
       },
       features: {
-        type: Sequelize.STRING
+        type: Sequelize.ARRAY(Sequelize.STRING)
       }
     });
   },

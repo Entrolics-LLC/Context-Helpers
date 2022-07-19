@@ -35,7 +35,7 @@ module.exports = (sequelize, DataTypes) => {
     retension: DataTypes.INTEGER,
     is_deleted: DataTypes.BOOLEAN,
     worflow_id: DataTypes.STRING,
-    features: DataTypes.STRING
+    features: DataTypes.ARRAY(DataTypes.STRING)
   }, {
     sequelize,
     modelName: 'projects',
