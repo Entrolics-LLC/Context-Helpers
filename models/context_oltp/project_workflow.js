@@ -22,7 +22,7 @@ module.exports = (sequelize, DataTypes) => {
     user_id: DataTypes.STRING,
     business_function_id: DataTypes.STRING,
     flow_name: DataTypes.STRING,
-    flow_json: DataTypes.STRING,
+    flow_json: 'CHARACTER VARYING(50000)',
     flow_description: DataTypes.STRING,
     created_at:  {
       type: DataTypes.DATE,

@@ -107,6 +107,12 @@ const arrayIntoBigqueryArray = (array) => ( //Convert JS Array into Bigquery Arr
         : `[]`
 )
 
+const arrayIntoPostgresqlArray = (array) => ( //Convert JS Array into Bigquery Array, Use only for array of strings.
+    Boolean(Array.isArray(array) && array?.length) ?
+        `'{"${array.toString().split(",").join(`","`)}"}'`
+        : `'{}'`
+)
+
 const keyPairTable = process.env.template_key_pairs
 const graphSchemaTable = process.env.template_graph_schema
 const projects_graph_schema = process.env.projects_graph_schema
@@ -766,6 +772,7 @@ module.exports = {
     getProjectDetails,
     getProjectFlow,
     arrayIntoBigqueryArray,
+    arrayIntoPostgresqlArray,
     imageTextDetection,
     getDocumentAIProcessorsList,
     createSchedule,
