@@ -14,7 +14,10 @@ module.exports = (sequelize, DataTypes) => {
     }
   }
   additional_properties_list.init({
-    property_id: DataTypes.STRING,
+    property_id: {
+      type: DataTypes.STRING,
+      primaryKey: true
+    },
     options: DataTypes.STRING,
     created_at: {
       type: DataTypes.DATE,
