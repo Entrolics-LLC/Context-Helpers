@@ -303,7 +303,7 @@ const getTemplateData = async (fileUrl, id, processorId, db) => {
         await axios.post(`https://us-central1-elaborate-howl-285701.cloudfunctions.net/doc_ai_v3_node_http${!isNull(processorId) ? `?processorId=${processorId}` : ''}`, { gcs_input_uri: fileUrl, formKeyPairTableName: 'schema_form_key_pairs', processorId })
             .then(async () => {
                 try {
-                    sqlQuery = `SELECT * FROM  artifact WHERE id='${id}'`
+                    sqlQuery = `SELECT * FROM  artifacts WHERE id='${id}'`
                     let template = await runQuery(db, sqlQuery)
                     sqlQuery = `SELECT * FROM  context.schema_form_key_pairs WHERE file_name='${template?.artifact_name}'`
                     let keyPairs = await runQuery(db, sqlQuery)
@@ -442,7 +442,7 @@ const updateTemplateHelper = async (arr, user_id, id, isCustom, db) => {
             uniqueArr.push(finalValidatedFieldName)
         }
 
-        sqlQuery = `UPDATE artifact SET is_verified=${true} WHERE artifact_name='${v?.file_name}'`
+        sqlQuery = `UPDATE artifacts SET is_verified=${true} WHERE artifact_name='${v?.file_name}'`
         await runQuery(db, sqlQuery)
         sqlQuery = `UPDATE ${templatedTable} SET is_ready=${true} WHERE id='${id}'`
         await runQuery(db, sqlQuery)
@@ -569,7 +569,7 @@ const formLoop = async (arr, is_custom, db) => {
 
     let ids = arr.map(d => `'${d?.fileId}'`)
 
-    let sqlQuery = `UPDATE artifact SET is_completed = ${true} WHERE id IN (${ids})`
+    let sqlQuery = `UPDATE artifacts SET is_completed = ${true} WHERE id IN (${ids})`
     await runQuery(db, sqlQuery)
         .then((res) => console.log('res complete', res))
         .catch((e) => console.log('e', e))
@@ -674,31 +674,29 @@ const createSchedule = async ({ uri, method = 'POST', schedule = '*/5 * * * *', 
 }
 
 const setProcessingStatus = ({ status, id, additonalKeys }, db) => {
-    let sqlQuery = `UPDATE artifact SET updated_at=CURRENT_DATETIME(), importing_status='${PROCESSING}' ${additonalKeys || ''} WHERE id='${id}'`
+    let sqlQuery = `UPDATE artifacts SET updated_at=CURRENT_DATETIME(), importing_status='${PROCESSING}' ${additonalKeys || ''} WHERE id='${id}'`
 
-    return db.query(sqlQuery)
+    return runQuery(db, sqlQuery)
 }
-
-
 
 const getProjectDetails = (project_id) => {
     if (!isNull(project_id)) {
-        const myQuery = `SELECT  * FROM \`context_oltp.projects\` where id='${project_id}'`
+        const myQuery = `SELECT * FROM projects where id='${project_id}'`
         return runQuery(myQuery)
-    } else {
+    }
+    else {
         throw new Error(`ProjectId is required`)
     }
-
 }
 
 const getProjectFlow = (flow_id) => {
     if (!isNull(flow_id)) {
-        const myQuery = `SELECT  f.id,f.gflow_id,f.flow_name,f.flow_json, f.flow_description,f.created_at, b.name as bf_name, b.description as bf_description, u.first_name, u.last_name,u.avatar,u.email FROM \`context_oltp.project_workflow\` f LEFT JOIN context.bussiness_functions b ON b.id=f.business_function_id LEFT JOIN context_oltp.users u ON u.id=f.user_id where f.id='${flow_id}'`
+        const myQuery = `SELECT f.id,f.gflow_id,f.flow_name,f.flow_json, f.flow_description,f.created_at, b.name as bf_name, b.description as bf_description, u.first_name, u.last_name,u.avatar,u.email FROM project_workflow f LEFT JOIN context.bussiness_functions b ON b.id=f.business_function_id LEFT JOIN users u ON u.id=f.user_id where f.id='${flow_id}'`
         return runQuery(myQuery)
-    } else {
+    }
+    else {
         throw new Error(`flowid is required`)
     }
-
 }
 
 const folderRecursive = async (client, folderEntries, service_key) => {
@@ -732,6 +730,7 @@ const folderRecursive = async (client, folderEntries, service_key) => {
 
     return fileAndFolders
 }
+
 const getVideoJSONKeys = (json) => {
     let excludeKeys = ['labelannotations', 'explicitannotation', 'segmentlabelannotations', 'shotlabelannotations', 'persondetectionannotations']
     let keys = Object.keys(json)
