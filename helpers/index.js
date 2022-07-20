@@ -61,7 +61,7 @@ const imageTextDetection = (destination, service_key) => {
     })
 }
 
-const getDocumentAIProcessorsList = (service_key) => {
+const getDocumentAIProcessorsList = (service_key, projectId) => {
     //https://googleapis.dev/nodejs/documentai/latest/v1beta3.DocumentProcessorServiceClient.html#listProcessors
     return new Promise(async (resolve, reject) => {
         try {
