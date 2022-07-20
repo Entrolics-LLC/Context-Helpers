@@ -28,11 +28,11 @@ module.exports = (sequelize, DataTypes) => {
     artifact_type: DataTypes.STRING,
     status_id: DataTypes.STRING,
     file_address: DataTypes.STRING,
-    created_at:  {
+    created_at: {
       type: DataTypes.DATE,
       allowNull: false
     },
-    updated_at:  {
+    updated_at: {
       type: DataTypes.DATE,
       allowNull: false
     },
@@ -63,11 +63,11 @@ module.exports = (sequelize, DataTypes) => {
     executed: DataTypes.BOOLEAN,
     original_file_address: DataTypes.STRING,
     redacted_file_address: DataTypes.STRING,
-    executed_rule_ids: DataTypes.STRING,
+    executed_rule_ids: DataTypes.ARRAY(DataTypes.STRING),
     executed_rule_id: DataTypes.STRING,
-    file_versions: DataTypes.STRING,
-    md5_versions: DataTypes.STRING,
-    artifact_name_versions: DataTypes.STRING
+    file_versions: DataTypes.ARRAY(DataTypes.STRING),
+    md5_versions: DataTypes.ARRAY(DataTypes.STRING),
+    artifact_name_versions: DataTypes.ARRAY(DataTypes.STRING)
   }, {
     sequelize,
     modelName: 'artifact',

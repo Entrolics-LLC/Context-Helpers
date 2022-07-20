@@ -128,19 +128,19 @@ module.exports = {
         type: Sequelize.STRING
       },
       executed_rule_ids: {
-        type: Sequelize.STRING
+        type: Sequelize.ARRAY(Sequelize.STRING)
       },
       executed_rule_id: {
         type: Sequelize.STRING
       },
       file_versions: {
-        type: Sequelize.STRING
+        type: Sequelize.ARRAY(Sequelize.STRING)
       },
       md5_versions: {
-        type: Sequelize.STRING
+        type: Sequelize.ARRAY(Sequelize.STRING)
       },
       artifact_name_versions: {
-        type: Sequelize.STRING
+        type: Sequelize.ARRAY(Sequelize.STRING)
       }
     });
   },
