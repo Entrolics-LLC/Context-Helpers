@@ -21,7 +21,7 @@ module.exports = {
         type: Sequelize.STRING
       },
       flow_json: {
-        type: Sequelize.STRING
+        type: 'CHARACTER VARYING(50000)'
       },
       flow_description: {
         type: Sequelize.STRING

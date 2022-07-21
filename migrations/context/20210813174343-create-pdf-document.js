@@ -3,6 +3,7 @@ module.exports = {
   up: async (queryInterface, Sequelize) => {
     await queryInterface.createTable('pdf_document', {
       file_name: {
+        primaryKey: true,
         type: Sequelize.STRING
       },
       pages_count: {
@@ -12,7 +13,7 @@ module.exports = {
         type: Sequelize.INTEGER
       },
       text: {
-        type: Sequelize.STRING
+        type: 'CHARACTER VARYING(1000000)'
       },
       schema_id: {
         type: Sequelize.STRING

@@ -14,10 +14,13 @@ module.exports = (sequelize, DataTypes) => {
     }
   }
   PdfDocument.init({
-    file_name: DataTypes.STRING,
+    file_name: {
+      primaryKey: true,
+      type: DataTypes.STRING
+    },
     pages_count: DataTypes.INTEGER,
     entities_count: DataTypes.INTEGER,
-    text: DataTypes.STRING,
+    text: 'CHARACTER VARYING(1000000)',
     schema_id: DataTypes.STRING
   }, {
     sequelize,
