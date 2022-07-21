@@ -43,7 +43,7 @@ module.exports = {
         type: Sequelize.STRING
       },
       shared_with_users: {
-        type: Sequelize.STRING
+        type: Sequelize.ARRAY(Sequelize.STRING)
       },
       created_by: {
         type: Sequelize.STRING
