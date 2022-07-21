@@ -36,7 +36,7 @@ module.exports = (sequelize, DataTypes) => {
     description: DataTypes.STRING,
     visibility: DataTypes.STRING,
     shared_with: DataTypes.STRING,
-    shared_with_users: DataTypes.STRING,
+    shared_with_users: DataTypes.ARRAY(DataTypes.STRING),
     created_by: DataTypes.STRING,
     is_deleted: DataTypes.BOOLEAN
   }, {
