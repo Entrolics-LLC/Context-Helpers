@@ -2,6 +2,7 @@
 const {
   Model
 } = require('sequelize');
+
 module.exports = (sequelize, DataTypes) => {
   class PdfPages extends Model {
     /**
@@ -20,7 +21,7 @@ module.exports = (sequelize, DataTypes) => {
     },
     dimensions: DataTypes.STRING,
     pageNumber: DataTypes.INTEGER,
-    paragraphs: DataTypes.STRING
+    paragraphs: 'CHARACTER VARYING(1000000)'
   }, {
     sequelize,
     modelName: 'pdf_pages',

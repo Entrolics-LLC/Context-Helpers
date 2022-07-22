@@ -13,7 +13,7 @@ module.exports = {
         type: Sequelize.INTEGER
       },
       paragraphs: {
-        type: Sequelize.STRING
+        type: 'CHARACTER VARYING(1000000)'
       }
     }, {
       schema: 'context'
