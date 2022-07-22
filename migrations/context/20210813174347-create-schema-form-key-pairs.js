@@ -53,7 +53,7 @@ module.exports = {
       value_y2: {
         type: Sequelize.FLOAT
       },
-      pageNumber: {
+      page_number: {
         type: Sequelize.INTEGER
       },
       id: {

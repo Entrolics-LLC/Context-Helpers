@@ -31,7 +31,7 @@ module.exports = (sequelize, DataTypes) => {
     value_x2: DataTypes.FLOAT,
     value_y1: DataTypes.FLOAT,
     value_y2: DataTypes.FLOAT,
-    pageNumber: DataTypes.INTEGER,
+    page_number: DataTypes.INTEGER,
     id: {
       allowNull: false,
       primaryKey: true,
