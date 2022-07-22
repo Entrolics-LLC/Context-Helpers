@@ -117,7 +117,7 @@ const keyPairTable = process.env.template_key_pairs
 const graphSchemaTable = process.env.template_graph_schema
 const projects_graph_schema = process.env.projects_graph_schema
 
-const templatedTable = process.env.templates_table
+const templatedTable = `context.templates`
 
 const tokenSecret = 'access_token'
 let minutes = process.env.NODE_ENV === 'production' ? 15 : 60
