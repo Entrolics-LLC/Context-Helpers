@@ -106,7 +106,7 @@ module.exports = {
       importing_status: {
         type: Sequelize.STRING
       },
-      numberOfAttempts: {
+      number_of_attempts: {
         type: Sequelize.INTEGER
       },
       error: {

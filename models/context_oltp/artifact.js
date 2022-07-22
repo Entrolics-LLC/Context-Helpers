@@ -56,7 +56,7 @@ module.exports = (sequelize, DataTypes) => {
     schedule_id: DataTypes.STRING,
     importing_operation_name: DataTypes.STRING,
     importing_status: DataTypes.STRING,
-    numberOfAttempts: DataTypes.INTEGER,
+    number_of_attempts: DataTypes.INTEGER,
     error: DataTypes.STRING,
     project_id: DataTypes.STRING,
     expires_at: DataTypes.DATE,
