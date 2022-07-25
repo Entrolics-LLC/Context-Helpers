@@ -435,7 +435,7 @@ const updateTemplateHelper = async (arr, user_id, id, isCustom, db) => {
         for (var v of arr) {
             finalValidatedFieldName = isNull(v?.validated_field_name) ? v?.field_name : v?.validated_field_name
             columnName = finalValidatedFieldName
-            sqlQuery = `UPDATE ${keyPairTable} SET updated_date=MOW(), validated_field_name='${finalValidatedFieldName}', data_types=${v?.data_type ? `${JSON.stringify(v?.data_type)}` : null}, updated_by='${user_id}', nullable=${v?.nullable}, column_name='${columnName}' WHERE id='${v?.id}'`
+            sqlQuery = `UPDATE ${keyPairTable} SET updated_date=NOW(), validated_field_name='${finalValidatedFieldName}', data_types=${v?.data_type ? `${JSON.stringify(v?.data_type)}` : null}, updated_by='${user_id}', nullable=${v?.nullable}, column_name='${columnName}' WHERE id='${v?.id}'`
             await runQuery(db, sqlQuery)
                 .then((s) => console.log('success'))
                 .catch((e) => console.log('error', e))
