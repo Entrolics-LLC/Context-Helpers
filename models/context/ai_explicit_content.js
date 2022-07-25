@@ -14,7 +14,11 @@ module.exports = (sequelize, DataTypes) => {
     }
   }
   AiExplicitContent.init({
-    artifact_name: DataTypes.STRING,
+    artifact_name: {
+      type: DataTypes.STRING,
+      primaryKey: true,
+      allowNull: false
+    },
     explicit_content: DataTypes.INTEGER,
     product: DataTypes.STRING
   }, {

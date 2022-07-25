@@ -84,6 +84,30 @@ module.exports = {
       },
       column_name: {
         type: Sequelize.STRING
+      },
+      width: {
+        type: Sequelize.STRING
+      },
+      height: {
+        type: Sequelize.STRING
+      },
+      w: {
+        type: Sequelize.FLOAT
+      },
+      h: {
+        type: Sequelize.FLOAT
+      },
+      name_width: {
+        type: Sequelize.FLOAT
+      },
+      name_height: {
+        type: Sequelize.FLOAT
+      },
+      value_width: {
+        type: Sequelize.FLOAT
+      },
+      value_height: {
+        type: Sequelize.FLOAT
       }
     }, {
       schema: 'context'

@@ -1,7 +1,9 @@
 'use strict';
 const {
-  Model
+  Model, DataTypes
 } = require('sequelize');
+
+DataTypes.FLOAT
 module.exports = (sequelize, DataTypes) => {
   class SchemaFormKeyPairs extends Model {
     /**
@@ -44,7 +46,15 @@ module.exports = (sequelize, DataTypes) => {
     dlp_match_likelihood: DataTypes.STRING,
     nullable: DataTypes.BOOLEAN,
     data_types: DataTypes.STRING,
-    column_name: DataTypes.STRING
+    column_name: DataTypes.STRING,
+    width: DataTypes.STRING,
+    height: DataTypes.STRING,
+    w: DataTypes.FLOAT,
+    h: DataTypes.FLOAT,
+    name_width: DataTypes.FLOAT,
+    name_height: DataTypes.FLOAT,
+    value_width: DataTypes.FLOAT,
+    value_height: DataTypes.FLOAT
   }, {
     sequelize,
     modelName: 'schema_form_key_pairs',

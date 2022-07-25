@@ -3,7 +3,9 @@ module.exports = {
   up: async (queryInterface, Sequelize) => {
     await queryInterface.createTable('ai_explicit_content', {
       artifact_name: {
-        type: Sequelize.STRING
+        type: Sequelize.STRING,
+        primaryKey: true,
+        allowNull: false
       },
       explicit_content: {
         type: Sequelize.INTEGER
