@@ -2,12 +2,6 @@
 module.exports = {
   async up(queryInterface, Sequelize) {
     await queryInterface.createTable('video_jsons', {
-      id: {
-        allowNull: false,
-        autoIncrement: true,
-        primaryKey: true,
-        type: Sequelize.INTEGER
-      },
       time_stamp: {
         type: Sequelize.DATE
       },
@@ -19,11 +13,11 @@ module.exports = {
       },
       created_at: {
         type: Sequelize.DATE,
-        allowNull: false
+        allowNull: true
       },
       updated_at: {
         type: Sequelize.DATE,
-        allowNull: false
+        allowNull: true
       }
     }, {
       schema: 'context'
