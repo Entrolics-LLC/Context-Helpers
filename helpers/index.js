@@ -763,6 +763,35 @@ const successFalse = (res, message, code = 500) => {
     return apiResponse(res, code || 500, obj)
 }
 
+const isValidHttpUrl = (string) => {
+    let url;
+    try {
+        url = new URL(string);
+    } catch (e) {
+        return false;
+    }
+    return url.protocol === "http:" || url.protocol === "https:";
+}
+
+const isFalsyValue = (value) => {
+    // console.log(value)
+    if (typeof value == "number") { //returns boolean form of number, 0 will be false, all others true.
+        return Boolean(value)
+    }
+    else if (typeof value == "boolean") { //if its boolean return opposite boolean, means if boolean true, it will return false, if boolean is false, returns true.
+        return !value
+    }
+    else if (Array.isArray(value)) { //if its empty array it will return true
+        return Boolean(value?.length)
+    } else if (value && typeof value == "object") { //if empty object, returns true
+        return Boolean(Object.keys(value)?.length)
+    }
+    else { //now lets check for string
+        return !value || value == undefined || value == null || value?.trim()?.toLowerCase() == "null" || value?.trim()?.toLowerCase() == "undefined" || value?.trim()?.toLowerCase() == "false"
+
+    }
+
+}
 
 module.exports = {
     runQuery,
@@ -796,5 +825,7 @@ module.exports = {
     folderRecursive,
     apiResponse,
     successFalse,
-    isNull
+    isNull,
+    isValidHttpUrl,
+    isFalsyValue
 }
