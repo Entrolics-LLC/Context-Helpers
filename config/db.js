@@ -5,7 +5,7 @@ const config = require('./config').development
 
 const init = (cloudConfig = config) => {
     try {
-        let db = new Sequelize({ ...cloudConfig, ssl: true, pool: { maxConnections: 5, maxIdleTime: 30 }, language: 'en' })
+        let db = new Sequelize({ ...cloudConfig, ssl: true, pool: { maxConnections: 50, maxIdleTime: 30 }, language: 'en' })
 
         console.log('connecting...')
         db.authenticate()
