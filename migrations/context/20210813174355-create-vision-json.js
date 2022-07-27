@@ -15,7 +15,15 @@ module.exports = {
       },
       vision_json: {
         type: Sequelize.STRING
-      }
+      },
+      created_at: {
+        type: DataTypes.DATE,
+        allowNull: false
+      },
+      updated_at: {
+        type: DataTypes.DATE,
+        allowNull: false
+      },
     }, {
       schema: 'context'
     });
