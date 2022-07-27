@@ -679,20 +679,20 @@ const setProcessingStatus = ({ status, id, additonalKeys }, db) => {
     return runQuery(db, sqlQuery)
 }
 
-const getProjectDetails = (project_id) => {
+const getProjectDetails = (project_id, DB) => {
     if (!isNull(project_id)) {
         const myQuery = `SELECT * FROM projects where id='${project_id}'`
-        return runQuery(myQuery)
+        return runQuery(DB, myQuery)
     }
     else {
         throw new Error(`ProjectId is required`)
     }
 }
 
-const getProjectFlow = (flow_id) => {
+const getProjectFlow = (flow_id, DB) => {
     if (!isNull(flow_id)) {
-        const myQuery = `SELECT f.id,f.gflow_id,f.flow_name,f.flow_json, f.flow_description,f.created_at, b.name as bf_name, b.description as bf_description, u.first_name, u.last_name,u.avatar,u.email FROM project_workflow f LEFT JOIN context.bussiness_functions b ON b.id=f.business_function_id LEFT JOIN users u ON u.id=f.user_id where f.id='${flow_id}'`
-        return runQuery(myQuery)
+        const myQuery = `SELECT f.id,f.gflow_id,f.flow_name,f.flow_json, f.flow_description,f.created_at, b.name as bf_name, b.description as bf_description, u.first_name, u.last_name,u.avatar,u.email FROM project_workflows f LEFT JOIN context.bussiness_functions b ON b.id=f.business_function_id LEFT JOIN users u ON u.id=f.user_id where f.id='${flow_id}'`
+        return runQuery(DB, myQuery)
     }
     else {
         throw new Error(`flowid is required`)
