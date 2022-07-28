@@ -31,7 +31,7 @@ module.exports = {
         type: Sequelize.STRING
       },
       query_array: {
-        type: Sequelize.STRING
+        type: Sequelize.ARRAY(Sequelize.STRING)
       },
       image: {
         type: Sequelize.STRING
