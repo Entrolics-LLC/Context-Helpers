@@ -87,7 +87,7 @@ const getDocumentAIProcessorsList = (service_key, projectId) => {
     })
 }
 
-const doesDocAIProcessorExist = (processorId, service_key, projectId) => {
+const doesDocAIProcessorExist = (processorId, projectId, service_key) => {
     return new Promise(async (resolve, reject) => {
         try {
             let d = await getDocumentAIProcessorsList(service_key, projectId)
