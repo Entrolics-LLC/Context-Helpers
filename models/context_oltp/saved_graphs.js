@@ -28,7 +28,7 @@ module.exports = (sequelize, DataTypes) => {
     modified_at: DataTypes.DATE,
     modified_by: DataTypes.STRING,
     description: DataTypes.STRING,
-    query_array: "CHARACTER VARYING[]",
+    query_array: DataTypes.ARRAY('CHARACTER VARYING(1000000)'),
     image: DataTypes.STRING
   }, {
     sequelize,
