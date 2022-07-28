@@ -21,14 +21,14 @@ module.exports = (sequelize, DataTypes) => {
     },
     user_id: DataTypes.STRING,
     name: DataTypes.STRING,
-    created_at:  {
+    created_at: {
       type: DataTypes.DATE,
       allowNull: false
     },
     modified_at: DataTypes.DATE,
     modified_by: DataTypes.STRING,
     description: DataTypes.STRING,
-    query_array: DataTypes.ARRAY(DataTypes.STRING),
+    query_array: "CHARACTER VARYING[]",
     image: DataTypes.STRING
   }, {
     sequelize,
