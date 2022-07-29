@@ -12,7 +12,7 @@ module.exports = {
         type: Sequelize.STRING
       },
       timestamp: {
-        type: Sequelize.INTEGER
+        type: Sequelize.FLOAT
       },
       web: {
         type: Sequelize.STRING
@@ -22,7 +22,7 @@ module.exports = {
         allowNull: false
       },
       links: {
-        type: Sequelize.STRING
+        type: Sequelize.ARRAY(Sequelize.STRING)
       },
       project_id: {
         type: Sequelize.STRING

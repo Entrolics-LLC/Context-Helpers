@@ -19,13 +19,13 @@ module.exports = (sequelize, DataTypes) => {
       primaryKey: true,
       type: DataTypes.STRING
     },
-    timestamp: DataTypes.INTEGER,
+    timestamp: DataTypes.FLOAT,
     web: DataTypes.STRING,
     created_at:  {
       type: DataTypes.DATE,
       allowNull: false
     },
-    links: DataTypes.STRING,
+    links: DataTypes.ARRAY(DataTypes.STRING),
     project_id: DataTypes.STRING
   }, {
     sequelize,
