@@ -1,34 +1,40 @@
 'use strict';
 module.exports = {
   up: async (queryInterface, Sequelize) => {
-    await queryInterface.createTable('vision_json', {
+    await queryInterface.createTable('approval', {
       id: {
         allowNull: false,
         primaryKey: true,
         type: Sequelize.STRING
       },
-      time_stamp: {
-        type: Sequelize.DATE
-      },
-      file_name: {
+      template_name: {
         type: Sequelize.STRING
       },
-      vision_json: {
+      type: {
+        type: Sequelize.STRING
+      },
+      status: {
+        type: Sequelize.STRING
+      },
+      possible_status: {
         type: Sequelize.STRING
       },
       created_at: {
-        type: DataTypes.DATE,
+        type: Sequelize.DATE,
         allowNull: false
       },
       updated_at: {
-        type: DataTypes.DATE,
+        type: Sequelize.DATE,
         allowNull: false
       },
+      project_id: {
+        type: Sequelize.STRING
+      }
     }, {
       schema: 'context'
     });
   },
   down: async (queryInterface, Sequelize) => {
-    await queryInterface.dropTable('vision_json');
+    await queryInterface.dropTable('approval');
   }
 };

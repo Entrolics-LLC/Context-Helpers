@@ -12,7 +12,7 @@ module.exports = {
         type: Sequelize.STRING
       },
       timestamp: {
-        type: Sequelize.INTEGER
+        type: Sequelize.FLOAT
       },
       web: {
         type: Sequelize.STRING

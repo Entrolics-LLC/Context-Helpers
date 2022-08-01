@@ -87,10 +87,10 @@ const getDocumentAIProcessorsList = (service_key, projectId) => {
     })
 }
 
-const doesDocAIProcessorExist = (processorId) => {
+const doesDocAIProcessorExist = (processorId, projectId, service_key) => {
     return new Promise(async (resolve, reject) => {
         try {
-            let d = await getDocumentAIProcessorsList()
+            let d = await getDocumentAIProcessorsList(service_key, projectId)
             let allProcessorIds = d?.map(d => d?.id)
             let isExisting = allProcessorIds?.indexOf(processorId) > -1
             resolve(isExisting)
@@ -114,8 +114,8 @@ const arrayIntoPostgresqlArray = (array) => ( //Convert JS Array into Bigquery A
 )
 
 const keyPairTable = `context.schema_form_key_pairs`
-const graphSchemaTable = `context.template_graph_schema`
-const projects_graph_schema = `projects_graph_schema`
+const graphSchemaTable = `context.template_graph_schemas`
+const projects_graph_schema = `projects_graph_schemas`
 
 const templatedTable = `context.templates`
 
@@ -465,7 +465,7 @@ const graphSchemHelper = async (template_id, user_id, graph_schema, db) => {
 
         await runQuery(db, sqlQuery)
             .then((s) => console.log('success from graphSchemHelper', s))
-            .catch((e) => console.log('error from graphSchemHelper', e?.errors))
+            .catch((e) => console.log('error from graphSchemHelper', e?.errors, sqlQuery))
     }
 }
 

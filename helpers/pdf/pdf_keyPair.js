@@ -19,7 +19,7 @@ exports.shouldFieldUpdate = async (req, db) => {
 
         const hasFieldName = !isNull(validated_field_name)
         const hasFieldValue = !isNull(validated_field_value)
-        const sqlQuery = `SELECT * FROM \`${projectId}.context.schema_form_key_pairs\` WHERE id='${id}'`
+        const sqlQuery = `SELECT * FROM context.schema_form_key_pairs WHERE id='${id}'`
         console.log(`body => `, body, `query `, sqlQuery)
 
         if (id) {
@@ -45,7 +45,7 @@ exports.shouldFieldUpdate = async (req, db) => {
     })
 }
 
-exports.updateField = (req) => {
+exports.updateField = async (req, db)  => {
     let body = req?.body
     let id = body?.id
     let validated_field_name = body?.validated_field_name
@@ -54,7 +54,7 @@ exports.updateField = (req) => {
     const hasFieldName = !isNull(validated_field_name)
     const hasFieldValue = !isNull(validated_field_value)
 
-    const sqlQuery = `UPDATE \`${projectId}.context.schema_form_key_pairs\` SET ${hasFieldName ? `${str_validated_field_name}='${validated_field_name}'` : ''} ${(hasFieldName && hasFieldValue) ? ',' : ''} ${hasFieldValue ? ` ${str_validated_field_value}='${validated_field_value}'` : ''} WHERE id='${id}'`
+    const sqlQuery = `UPDATE context.schema_form_key_pairs SET ${hasFieldName ? `${str_validated_field_name}='${validated_field_name}'` : ''} ${(hasFieldName && hasFieldValue) ? ',' : ''} ${hasFieldValue ? ` ${str_validated_field_value}='${validated_field_value}'` : ''} WHERE id='${id}'`
     console.log(`body => `, body, `query `, sqlQuery)
     // console.log(sqlQuery)
     const option = {
@@ -62,5 +62,5 @@ exports.updateField = (req) => {
         query: sqlQuery
     }
 
-    return bigQuery.query(option)
+    return await runQuery(db, sqlQuery)
 }
