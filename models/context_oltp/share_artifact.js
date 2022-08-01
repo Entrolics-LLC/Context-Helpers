@@ -14,7 +14,11 @@ module.exports = (sequelize, DataTypes) => {
     }
   }
   share_artifact.init({
-    artifact_id: DataTypes.STRING,
+    artifact_id: {
+      allowNull: false,
+      primaryKey: true,
+      type: DataTypes.STRING
+    },
     share_id: DataTypes.STRING,
     user_id: DataTypes.STRING,
     type: DataTypes.STRING
