@@ -465,7 +465,7 @@ const graphSchemHelper = async (template_id, user_id, graph_schema, db) => {
 
         await runQuery(db, sqlQuery)
             .then((s) => console.log('success from graphSchemHelper', s))
-            .catch((e) => console.log('error from graphSchemHelper', e?.errors))
+            .catch((e) => console.log('error from graphSchemHelper', e?.errors, sqlQuery))
     }
 }
 
