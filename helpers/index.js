@@ -114,8 +114,8 @@ const arrayIntoPostgresqlArray = (array) => ( //Convert JS Array into Bigquery A
 )
 
 const keyPairTable = `context.schema_form_key_pairs`
-const graphSchemaTable = `context.template_graph_schema`
-const projects_graph_schema = `projects_graph_schema`
+const graphSchemaTable = `context.template_graph_schemas`
+const projects_graph_schema = `projects_graph_schemas`
 
 const templatedTable = `context.templates`
 
