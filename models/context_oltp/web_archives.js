@@ -25,7 +25,7 @@ module.exports = (sequelize, DataTypes) => {
       type: DataTypes.DATE,
       allowNull: false
     },
-    links: DataTypes.ARRAY(DataTypes.STRING),
+    links:DataTypes.STRING,
     project_id: DataTypes.STRING
   }, {
     sequelize,

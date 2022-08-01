@@ -22,7 +22,7 @@ module.exports = {
         allowNull: false
       },
       links: {
-        type: Sequelize.ARRAY(Sequelize.STRING)
+        type: Sequelize.STRING
       },
       project_id: {
         type: Sequelize.STRING
