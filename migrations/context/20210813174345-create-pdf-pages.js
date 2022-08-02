@@ -4,6 +4,7 @@ module.exports = {
     await queryInterface.createTable('pdf_pages', {
       file_name: {
         primaryKey: true,
+        unique: false,
         type: Sequelize.STRING
       },
       dimensions: {
