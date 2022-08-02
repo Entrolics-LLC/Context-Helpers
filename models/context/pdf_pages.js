@@ -15,9 +15,12 @@ module.exports = (sequelize, DataTypes) => {
     }
   }
   PdfPages.init({
-    file_name: {
+    id: {
+      allowNull: false,
       primaryKey: true,
-      unique: false,
+      type: DataTypes.INTEGER
+    },
+    file_name: {
       type: DataTypes.STRING
     },
     dimensions: DataTypes.STRING,
