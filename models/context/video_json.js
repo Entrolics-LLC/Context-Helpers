@@ -15,16 +15,12 @@ module.exports = (sequelize, DataTypes) => {
   }
   video_json.init({
     time_stamp: DataTypes.DATE,
-    file_name: DataTypes.STRING,
-    video_json: DataTypes.STRING,
-    created_at: {
-      type: DataTypes.DATE,
-      allowNull: true
+    file_name: {
+      primaryKey: true,
+      allowNull: false,
+      type: DataTypes.STRING
     },
-    updated_at: {
-      type: DataTypes.DATE,
-      allowNull: true
-    },
+    video_json: DataTypes.STRING
   }, {
     sequelize,
     modelName: 'video_jsons',
