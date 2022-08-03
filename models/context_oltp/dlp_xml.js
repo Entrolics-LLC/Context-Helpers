@@ -14,11 +14,16 @@ module.exports = (sequelize, DataTypes) => {
     }
   }
   dlp_xml.init({
+    id: {
+      allowNull: false,
+      primaryKey: true,
+      type: DataTypes.STRING
+    },
     file_id: DataTypes.STRING,
     value: DataTypes.STRING,
     type: DataTypes.STRING,
     likelihood: DataTypes.STRING,
-    created_at:  {
+    created_at: {
       type: DataTypes.DATE,
       allowNull: false
     },
