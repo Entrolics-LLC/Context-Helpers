@@ -6,19 +6,13 @@ module.exports = {
         type: Sequelize.DATE
       },
       file_name: {
+        primaryKey: true,
+        allowNull: false,
         type: Sequelize.STRING
       },
       video_json: {
         type: Sequelize.STRING
       },
-      created_at: {
-        type: Sequelize.DATE,
-        allowNull: true
-      },
-      updated_at: {
-        type: Sequelize.DATE,
-        allowNull: true
-      }
     }, {
       schema: 'context'
     });

@@ -15,16 +15,12 @@ module.exports = (sequelize, DataTypes) => {
   }
   VisionJson.init({
     time_stamp: DataTypes.DATE,
-    file_name: DataTypes.STRING,
-    vision_json: DataTypes.STRING,
-    created_at: {
-      type: DataTypes.DATE,
-      allowNull: false
+    file_name: {
+      primaryKey: true,
+      allowNull: false,
+      type: DataTypes.STRING
     },
-    updated_at: {
-      type: DataTypes.DATE,
-      allowNull: false
-    },
+    vision_json: DataTypes.STRING
   }, {
     sequelize,
     modelName: 'vision_json',
