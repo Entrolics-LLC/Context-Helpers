@@ -14,6 +14,11 @@ module.exports = (sequelize, DataTypes) => {
     }
   }
   speech_to_text.init({
+    id: {
+      allowNull: false,
+      primaryKey: true,
+      type: DataTypes.STRING
+    },
     time_stamp: DataTypes.DATE,
     file_name: DataTypes.STRING,
     transcript: DataTypes.STRING,
