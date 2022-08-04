@@ -21,7 +21,7 @@ module.exports = {
         type: Sequelize.STRING
       },
       words: {
-        type: Sequelize.STRING
+        type: Sequelize.JSONB
       },
       original_file_name: {
         type: Sequelize.STRING

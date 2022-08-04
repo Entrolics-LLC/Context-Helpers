@@ -23,11 +23,11 @@ module.exports = (sequelize, DataTypes) => {
     file_name: DataTypes.STRING,
     transcript: DataTypes.STRING,
     confidence: DataTypes.STRING,
-    words: DataTypes.STRING,
+    words: DataTypes.JSONB,
     original_file_name: DataTypes.STRING
   }, {
     sequelize,
-    modelName: 'speech_to_text',
+    modelName: 'speech_to_texts',
     schema: 'context',
     createdAt: false,
     updatedAt: false

@@ -22,7 +22,7 @@ module.exports = (sequelize, DataTypes) => {
     classification_confidence: DataTypes.STRING
   }, {
     sequelize,
-    modelName: 'speech_to_txt',
+    modelName: 'speech_to_txts',
     schema: 'context',
     createdAt: false,
     updatedAt: false
