@@ -3,7 +3,7 @@ const {
   Model
 } = require('sequelize');
 module.exports = (sequelize, DataTypes) => {
-  class ImageLogo extends Model {
+  class speech_to_text extends Model {
     /**
      * Helper method for defining associations.
      * This method is not a part of Sequelize lifecycle.
@@ -12,8 +12,8 @@ module.exports = (sequelize, DataTypes) => {
     static associate(models) {
       // define association here
     }
-  };
-  ImageLogo.init({
+  }
+  speech_to_text.init({
     id: {
       allowNull: false,
       primaryKey: true,
@@ -21,15 +21,16 @@ module.exports = (sequelize, DataTypes) => {
     },
     time_stamp: DataTypes.DATE,
     file_name: DataTypes.STRING,
-    description: DataTypes.STRING,
-    score: DataTypes.FLOAT,
-    input_uri: DataTypes.STRING
+    transcript: DataTypes.STRING,
+    confidence: DataTypes.STRING,
+    words: DataTypes.JSONB,
+    original_file_name: DataTypes.STRING
   }, {
     sequelize,
-    modelName: 'image_logo',
+    modelName: 'speech_to_texts',
     schema: 'context',
     createdAt: false,
     updatedAt: false
   });
-  return ImageLogo;
+  return speech_to_text;
 };

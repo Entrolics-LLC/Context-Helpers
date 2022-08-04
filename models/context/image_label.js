@@ -14,6 +14,11 @@ module.exports = (sequelize, DataTypes) => {
     }
   };
   image_label.init({
+    id: {
+      allowNull: false,
+      primaryKey: true,
+      type: DataTypes.STRING
+    },
     time_stamp: DataTypes.DATE,
     file_name: DataTypes.STRING,
     description: DataTypes.STRING,
