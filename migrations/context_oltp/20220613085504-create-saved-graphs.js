@@ -31,7 +31,7 @@ module.exports = {
         type: Sequelize.STRING
       },
       query_array: {
-        type: "CHARACTER VARYING[]"
+        type: Sequelize.ARRAY('CHARACTER VARYING(3000)')
       },
       image: {
         type: Sequelize.STRING
