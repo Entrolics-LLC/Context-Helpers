@@ -21,7 +21,7 @@ module.exports = (sequelize, DataTypes) => {
     },
     flow_name: DataTypes.STRING,
     flow_owner: DataTypes.STRING,
-    flow_json: DataTypes.STRING,
+    flow_json: 'CHARACTER VARYING(100000)',
     created_at:  {
       type: DataTypes.DATE,
       allowNull: false
