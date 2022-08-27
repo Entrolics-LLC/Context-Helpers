@@ -28,7 +28,7 @@ module.exports = (sequelize, DataTypes) => {
     modified_at: DataTypes.DATE,
     modified_by: DataTypes.STRING,
     description: DataTypes.STRING,
-    query_array: DataTypes.ARRAY(DataTypes.STRING),
+    query_array: DataTypes.ARRAY(DataTypes.STRING(4000)),
     image: DataTypes.STRING
   }, {
     sequelize,

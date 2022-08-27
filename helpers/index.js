@@ -793,6 +793,20 @@ const isFalsyValue = (value) => {
 
 }
 
+const validateFields = (input, project_id, rule_id) => {
+    if (isNull(project_id)) {
+        throw new Error(`Missing Params! #pId`)
+    }
+
+    if (isNull(rule_id)) {
+        throw new Error(`Missing Params! #rId`)
+    }
+
+    if (isNull(input)) {
+        throw new Error(`Missing Params! #inputId`)
+    }
+}
+
 module.exports = {
     runQuery,
     parseVideoData,
@@ -827,5 +841,6 @@ module.exports = {
     successFalse,
     isNull,
     isValidHttpUrl,
-    isFalsyValue
+    isFalsyValue,
+    validateFields
 }
