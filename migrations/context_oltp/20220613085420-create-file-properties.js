@@ -2,10 +2,13 @@
 module.exports = {
   async up(queryInterface, Sequelize) {
     await queryInterface.createTable('file_properties', {
-      file_id: {
+      id: {
         allowNull: false,
         autoIncrement: true,
         primaryKey: true,
+        type: Sequelize.STRING
+      },
+      file_id: {
         type: Sequelize.STRING
       },
       additional_property_id: {
