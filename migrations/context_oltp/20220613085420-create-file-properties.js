@@ -6,7 +6,7 @@ module.exports = {
         allowNull: false,
         autoIncrement: true,
         primaryKey: true,
-        type: Sequelize.STRING
+        type: 'CHARACTER VARYING(255)'
       },
       file_id: {
         type: Sequelize.STRING

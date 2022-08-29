@@ -17,7 +17,7 @@ module.exports = (sequelize, DataTypes) => {
     id: {
       allowNull: false,
       primaryKey: true,
-      type: DataTypes.STRING
+      type: 'CHARACTER VARYING(255)'
     },
     file_id: DataTypes.STRING,
     additional_property_id: DataTypes.STRING,
