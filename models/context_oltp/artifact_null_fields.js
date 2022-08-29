@@ -20,7 +20,7 @@ module.exports = (sequelize, DataTypes) => {
       primaryKey: true,
       type: DataTypes.STRING
     },
-    fields: DataTypes.STRING,
+    fields: DataTypes.ARRAY(DataTypes.STRING),
     missing_fields: DataTypes.STRING,
     project_id: DataTypes.STRING
   }, {

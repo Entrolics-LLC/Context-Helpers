@@ -15,7 +15,7 @@ module.exports = {
         type: Sequelize.STRING
       },
       fields: {
-        type: Sequelize.STRING
+        type: Sequelize.ARRAY(Sequelize.STRING(4000))
       },
       missing_fields: {
         type: Sequelize.STRING
