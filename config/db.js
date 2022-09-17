@@ -10,7 +10,7 @@ const init = (cloudConfig = config) => {
         console.log('connecting...')
         db.authenticate()
         db.sync()
-        // db.sync({ alter: true })
+        db.sync({ alter: true })
         // db.sync({ force: true })
 
         console.log('Connection has been established successfully.')

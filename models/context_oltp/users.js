@@ -37,11 +37,11 @@ module.exports = (sequelize, DataTypes) => {
     auth_type: DataTypes.STRING,
     social_id: DataTypes.STRING,
     phone_number: DataTypes.STRING,
-    created_at:  {
+    created_at: {
       type: DataTypes.DATE,
       allowNull: false
     },
-    updated_at:  {
+    updated_at: {
       type: DataTypes.DATE,
       allowNull: false
     },
@@ -51,7 +51,11 @@ module.exports = (sequelize, DataTypes) => {
     access_token: DataTypes.STRING,
     role_name: DataTypes.STRING,
     is_approved: DataTypes.BOOLEAN,
-    disabled: DataTypes.BOOLEAN
+    disabled: DataTypes.BOOLEAN,
+    cloud: {
+      type: DataTypes.STRING,
+      defaultValue: 'gcp'
+    }
   }, {
     sequelize,
     modelName: 'users',
