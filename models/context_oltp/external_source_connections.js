@@ -22,7 +22,7 @@ module.exports = (sequelize, DataTypes) => {
     source_name: DataTypes.STRING,
     user_id: DataTypes.STRING,
     source_email: DataTypes.STRING,
-    configurations: DataTypes.STRING,
+    configurations: 'CHARACTER VARYING(1000000)',
     created_at:  {
       type: DataTypes.DATE,
       allowNull: false
