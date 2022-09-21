@@ -93,9 +93,6 @@ module.exports = {
       },
       disabled: {
         type: Sequelize.BOOLEAN
-      },
-      cloud: {
-        type: Sequelize.STRING
       }
     });
   },

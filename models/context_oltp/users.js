@@ -51,11 +51,7 @@ module.exports = (sequelize, DataTypes) => {
     access_token: DataTypes.STRING,
     role_name: DataTypes.STRING,
     is_approved: DataTypes.BOOLEAN,
-    disabled: DataTypes.BOOLEAN,
-    cloud: {
-      type: DataTypes.STRING,
-      defaultValue: 'gcp'
-    }
+    disabled: DataTypes.BOOLEAN
   }, {
     sequelize,
     modelName: 'users',
