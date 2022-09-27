@@ -148,6 +148,29 @@ const getAuthUrl = async (uri, storage) => {
     return undefined
 }
 
+const getAuthS3Url = async (uri, storage) => {
+    if (uri && uri.length) {
+        try {
+            const match = uri?.match(/s3:\/\/(.+?)\/(.+)/i)
+            const file_name = match?.[2]
+            const bucket_name = match?.[1]
+            const signedUrlExpireSeconds = 60 * 60 * 24 * 2
+            const url = await storage.getSignedUrl('getObject', {
+                Bucket: bucket_name,
+                Key: file_name,
+                Expires: signedUrlExpireSeconds
+            })
+            console.log("NEW URL ==>", url)
+            return url
+        }
+        catch (e) {
+            console.log('e', e)
+            return uri
+        }
+    }
+    return undefined
+}
+
 const validateData = (data) => data ? "'" + data?.replace?.(/'|"/gi, '') + "'" : null
 
 // const emailText = (user) => {
@@ -842,5 +865,6 @@ module.exports = {
     isNull,
     isValidHttpUrl,
     isFalsyValue,
-    validateFields
+    validateFields,
+    getAuthS3Url
 }
