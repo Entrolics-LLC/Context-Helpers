@@ -19,6 +19,9 @@ const init = (cloudConfig = config) => {
             .then(() => console.log('****'))
             .catch((e) => console.log('error'))
 
+        db.createSchema('sentiment')
+            .then(() => console.log('****'))
+            .catch((e) => console.log('error'))
         addModels(db)
 
         return db
