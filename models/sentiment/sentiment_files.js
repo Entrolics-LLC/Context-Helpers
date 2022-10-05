@@ -22,6 +22,9 @@ module.exports = (sequelize, DataTypes) => {
       },
       file_original_name: DataTypes.STRING,
       file_address: DataTypes.STRING,
+      overall_pos: DataTypes.INTEGER,
+      overall_neg: DataTypes.INTEGER,
+      overall_neu: DataTypes.INTEGER,
       created_at: {
         type: DataTypes.DATE
       },
