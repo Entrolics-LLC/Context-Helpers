@@ -28,6 +28,7 @@ module.exports = (sequelize, DataTypes) => {
       topics:DataTypes.ARRAY(DataTypes.STRING),
       topics_confidence:DataTypes.ARRAY(DataTypes.FLOAT),
       additional_fields:DataTypes.JSON,
+      notes:DataTypes.STRING(10000),
       created_at: {
         type: DataTypes.DATE
       },
