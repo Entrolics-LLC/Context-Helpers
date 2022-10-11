@@ -22,7 +22,7 @@ module.exports = (sequelize, DataTypes) => {
       },
       file_original_name: DataTypes.STRING,
       file_address: DataTypes.STRING,
-      paragraph:DataTypes.STRING(2000),
+      paragraph:DataTypes.STRING(1000000),
       score: DataTypes.FLOAT,
       magnitude: DataTypes.FLOAT,
       topics:DataTypes.ARRAY(DataTypes.STRING),
