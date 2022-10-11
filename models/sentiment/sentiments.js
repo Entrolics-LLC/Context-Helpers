@@ -22,6 +22,8 @@ module.exports = (sequelize, DataTypes) => {
     },
     file_name: DataTypes.STRING,
     sentence: DataTypes.STRING(1000),
+    start_index:DataTypes.INTEGER,
+    last_index:DataTypes.INTEGER,
     score: DataTypes.FLOAT,
     magnitude: DataTypes.FLOAT,
     entities:DataTypes.ARRAY(DataTypes.STRING)
