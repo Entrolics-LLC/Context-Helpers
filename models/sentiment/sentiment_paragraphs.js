@@ -29,6 +29,7 @@ module.exports = (sequelize, DataTypes) => {
       topics_confidence:DataTypes.ARRAY(DataTypes.FLOAT),
       additional_fields:DataTypes.JSON,
       notes:DataTypes.STRING(10000),
+      isVerified:DataTypes.BOOLEAN,
       created_at: {
         type: DataTypes.DATE
       },
