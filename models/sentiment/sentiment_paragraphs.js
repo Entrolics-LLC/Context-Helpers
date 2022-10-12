@@ -30,6 +30,7 @@ module.exports = (sequelize, DataTypes) => {
       additional_fields:DataTypes.JSON,
       notes:DataTypes.STRING(10000),
       isVerified:DataTypes.BOOLEAN,
+      similar_documents:DataTypes.INTEGER,
       created_at: {
         type: DataTypes.DATE
       },
