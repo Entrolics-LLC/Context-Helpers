@@ -24,6 +24,8 @@ module.exports = (sequelize, DataTypes) => {
             file_name: DataTypes.STRING,
             entity: DataTypes.STRING,
             magnitude: DataTypes.FLOAT,
+            salience:DataTypes.FLOAT,
+            entity_type:DataTypes.STRING,
             score: DataTypes.FLOAT,
             created_at: {
                 type: DataTypes.DATE
