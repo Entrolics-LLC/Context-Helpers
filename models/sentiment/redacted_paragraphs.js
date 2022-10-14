@@ -24,7 +24,7 @@ module.exports = (sequelize, DataTypes) => {
             file_name: DataTypes.STRING,
             redacted_paragraph: DataTypes.STRING(10000),
             total_findings:DataTypes.INTEGER,
-            transformation_types:DataTypes.ARRAY(DataTypes.STRING),
+            transformation_types:DataTypes.STRING(10000),
             is_deleted:DataTypes.BOOLEAN,
             created_at: {
                 type: DataTypes.DATE
