@@ -32,7 +32,7 @@ module.exports = (sequelize, DataTypes) => {
         },
         {
             sequelize,
-            modelName: 'sentiment_entities',
+            modelName: 'redacted_paragraphs',
             schema: 'sentiment',
             createdAt: false,
             updatedAt: false
