@@ -3,14 +3,14 @@ const exec = require('child_process').exec
 const addModels = require('../models')
 const config = require('./config').development
 
-const init = (cloudConfig = config) => {
+const init = (cloudConfig = config, alter = false) => {
     try {
         let db = new Sequelize({ ...cloudConfig, ssl: true, pool: { maxConnections: 50, maxIdleTime: 30 }, language: 'en' })
 
         console.log('connecting...')
         db.authenticate()
         // db.sync()
-        db.sync({ alter: true })
+        db.sync({ alter })
         // db.sync({ force: true })
 
         console.log('Connection has been established successfully.')
