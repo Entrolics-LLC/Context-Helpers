@@ -10,7 +10,6 @@ const init = (cloudConfig = config, alter = false) => {
         console.log('connecting...')
         db.authenticate()
         // db.sync()
-        db.sync({ alter: alter })
         // db.sync({ force: true })
 
         console.log('Connection has been established successfully.')
@@ -22,7 +21,11 @@ const init = (cloudConfig = config, alter = false) => {
         db.createSchema('sentiment')
             .then(() => console.log('****'))
             .catch((e) => console.log('error'))
-        addModels(db)
+
+        if (alter) {
+            db.sync({ alter })
+            addModels(db)
+        }
 
         return db
     }
